@@ -1,0 +1,126 @@
+.hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 1.5s ease-in-out;
+  z-index: 1; pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1; pointer-events: auto;
+}
+
+.bgWrap {
+  position: absolute; inset: 0;
+  /* subtle zoom out effect */
+  transform: scale(1.1);
+  transition: transform 10s ease-out;
+}
+
+.slide.active .bgWrap {
+  transform: scale(1);
+}
+
+.bgImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,15,0.4) 0%, rgba(10,10,15,0.9) 100%);
+}
+
+.content {
+  position: relative; z-index: 2;
+  max-width: 900px; padding: 0 20px; margin-top: 60px;
+}
+
+.badge {
+  display: inline-block; padding: 8px 16px;
+  background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.title {
+  font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900;
+  line-height: 1; letter-spacing: -2px; margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.accent {
+  color: var(--yellow); font-style: italic; font-family: 'Playfair Display', serif;
+}
+
+.sub {
+  font-size: 1.25rem; color: rgba(240,240,245,0.8); max-width: 600px;
+  margin: 0 auto 48px; line-height: 1.6;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.btns {
+  display: flex; gap: 20px; justify-content: center;
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+
+.btnPrimary {
+  background: var(--yellow); color: var(--dark); font-weight: 700;
+  padding: 16px 36px; border-radius: 50px; font-size: 1rem;
+  transition: var(--transition); text-decoration: none; display: inline-block;
+}
+
+.btnPrimary:hover {
+  background: #fff; transform: translateY(-4px);
+  box-shadow: 0 12px 24px var(--yellow-glow);
+}
+
+.btnSecondary {
+  background: transparent; color: var(--text); font-weight: 600;
+  padding: 16px 36px; border-radius: 50px; font-size: 1rem;
+  border: 1px solid rgba(255,255,255,0.3); transition: var(--transition);
+  text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+
+.btnSecondary:hover {
+  background: rgba(255,255,255,0.1); border-color: var(--text);
+}
+
+.stats {
+  display: flex; gap: 48px; justify-content: center; margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;
+  animation: fadeUp 0.8s 0.8s ease both;
+}
+
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.num { font-size: 2rem; font-weight: 800; color: var(--yellow); }
+.stat span:last-child { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+.controls {
+  position: absolute; bottom: 40px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 12px; z-index: 2;
+}
+
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dotActive { background: var(--yellow); width: 32px; border-radius: 5px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .btns { flex-direction: column; }
+  .stats { flex-direction: column; gap: 24px; text-align: center; }
+}

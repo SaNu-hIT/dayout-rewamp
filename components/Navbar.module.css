@@ -1,0 +1,58 @@
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+  transition: var(--transition);
+}
+.scrolled {
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;
+  background: none; border: none; cursor: pointer; color: var(--text);
+}
+.logoImg { border-radius: 8px; object-fit: contain; }
+.accent { color: var(--yellow); }
+.links { display: flex; gap: 36px; }
+.link {
+  font-size: 0.92rem; font-weight: 500; color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  transition: color var(--transition); position: relative; padding: 4px 0;
+}
+.link::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--yellow); border-radius: 2px; transition: width var(--transition);
+}
+.link:hover { color: var(--text); }
+.link:hover::after { width: 100%; }
+.cta {
+  background: var(--yellow); color: var(--dark); font-weight: 700;
+  padding: 10px 24px; border-radius: 50px; font-size: 0.9rem;
+  transition: var(--transition);
+}
+.cta:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--yellow-glow); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; display: block; }
+.mobileNav {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(10,10,15,0.98); backdrop-filter: blur(20px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+}
+.mobileLink {
+  font-size: 1.8rem; font-weight: 700; color: var(--text);
+  background: none; border: none; cursor: pointer; transition: color var(--transition);
+}
+.mobileLink:hover { color: var(--yellow); }
+.mobileClose {
+  position: absolute; top: 24px; right: 5%;
+  font-size: 2rem; color: var(--muted); cursor: pointer; background: none; border: none;
+}
+@media (max-width: 640px) {
+  .links, .cta { display: none; }
+  .hamburger { display: flex; }
+}

@@ -1,0 +1,39 @@
+.section { padding: 100px 5%; background: var(--dark); }
+.tabs { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+.tab {
+  padding: 10px 22px; border-radius: 50px;
+  border: 1px solid var(--border); color: var(--muted);
+  font-size: 0.9rem; font-weight: 600; transition: var(--transition);
+  background: none; cursor: pointer;
+}
+.tabActive { background: var(--yellow); border-color: var(--yellow); color: var(--dark); }
+.tab:hover { background: var(--yellow); border-color: var(--yellow); color: var(--dark); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 28px; }
+.card {
+  border-radius: var(--radius); overflow: hidden;
+  background: var(--card-bg); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.4); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
+.imgWrap { position: relative; height: 220px; overflow: hidden; }
+.img { object-fit: cover; transition: transform 0.6s ease !important; }
+.card:hover .img { transform: scale(1.06) !important; }
+.badge {
+  position: absolute; top: 16px; left: 16px; z-index: 1;
+  background: rgba(10,10,15,0.75); backdrop-filter: blur(8px);
+  border: 1px solid var(--border); border-radius: 50px;
+  padding: 5px 14px; font-size: 0.78rem; font-weight: 600; color: var(--yellow);
+}
+.body { padding: 24px; }
+.body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.body p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
+.footer { display: flex; align-items: center; justify-content: space-between; }
+.price { font-size: 1.2rem; font-weight: 800; color: var(--yellow); }
+.price span { font-size: 0.78rem; font-weight: 400; color: var(--muted); }
+.btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--yellow); color: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; transition: var(--transition); border: none; cursor: pointer;
+}
+.btn:hover { background: #fff; transform: scale(1.1); }
