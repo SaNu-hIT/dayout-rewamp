@@ -2,57 +2,97 @@
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   padding: 0 5%;
   display: flex; align-items: center; justify-content: space-between;
-  height: 72px;
-  transition: var(--transition);
+  height: 80px;
+  transition: all 0.4s ease;
+  background: transparent;
+  border-bottom: 1px solid transparent;
 }
+
 .scrolled {
-  background: rgba(10,10,15,0.92);
+  height: 72px;
+  background: rgba(10, 10, 15, 0.95);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
+
 .logo {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 12px;
   font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;
-  background: none; border: none; cursor: pointer; color: var(--text);
+  color: var(--text);
+  transition: transform 0.3s ease;
 }
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
 .logoImg { border-radius: 8px; object-fit: contain; }
 .accent { color: var(--yellow); }
-.links { display: flex; gap: 36px; }
+
+.links { display: flex; gap: 40px; }
+
 .link {
-  font-size: 0.92rem; font-weight: 500; color: var(--muted);
-  background: none; border: none; cursor: pointer;
-  transition: color var(--transition); position: relative; padding: 4px 0;
+  font-size: 0.95rem; font-weight: 700; color: #fff;
+  transition: all 0.3s ease; position: relative; padding: 4px 0;
+  text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
+
 .link::after {
   content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-  background: var(--yellow); border-radius: 2px; transition: width var(--transition);
+  background: var(--yellow); border-radius: 2px; transition: width 0.3s ease;
 }
+
 .link:hover { color: var(--text); }
 .link:hover::after { width: 100%; }
+
 .cta {
   background: var(--yellow); color: var(--dark); font-weight: 700;
-  padding: 10px 24px; border-radius: 50px; font-size: 0.9rem;
-  transition: var(--transition);
+  padding: 12px 28px; border-radius: 50px; font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
+  text-transform: uppercase; letter-spacing: 0.5px;
 }
-.cta:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--yellow-glow); }
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-.hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; display: block; }
+
+.cta:hover { 
+  background: #fff; transform: translateY(-2px); 
+  box-shadow: 0 8px 25px var(--yellow-glow); 
+}
+
+.hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 10px; }
+.hamburger span { width: 26px; height: 2px; background: var(--text); border-radius: 2px; display: block; transition: 0.3s; }
+
 .mobileNav {
-  position: fixed; inset: 0; z-index: 999;
-  background: rgba(10,10,15,0.98); backdrop-filter: blur(20px);
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  animation: fadeIn 0.4s ease;
 }
+
 .mobileLink {
   font-size: 1.8rem; font-weight: 700; color: var(--text);
-  background: none; border: none; cursor: pointer; transition: color var(--transition);
+  transition: 0.3s;
 }
-.mobileLink:hover { color: var(--yellow); }
+
+.mobileLink:hover { color: var(--yellow); transform: scale(1.1); }
+
 .mobileClose {
   position: absolute; top: 24px; right: 5%;
-  font-size: 2rem; color: var(--muted); cursor: pointer; background: none; border: none;
+  font-size: 2rem; color: var(--muted); cursor: pointer;
 }
-@media (max-width: 640px) {
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+  .links { gap: 20px; }
+}
+
+@media (max-width: 768px) {
   .links, .cta { display: none; }
   .hamburger { display: flex; }
 }

@@ -29,21 +29,35 @@ export default function Hero() {
         </div>
       ))}
       
-      <div className={styles.content}>
-        <div className={styles.badge}>🏖 The Ultimate Goa Experience</div>
-        <h1 className={styles.title}>
-          {SLIDES[current].title1} <span className={styles.accent}>{SLIDES[current].title2}</span>
-        </h1>
-        <p className={styles.sub}>{SLIDES[current].sub}</p>
-        <div className={styles.btns}>
-          <Link href="/contact" className={styles.btnPrimary}>Plan Your Trip</Link>
-          <a href="#destinations" className={styles.btnSecondary}>Explore <span>↓</span></a>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.badge}>🏖 The Ultimate Goa Experience</div>
+          <h1 className={styles.title}>
+            {SLIDES[current].title1} <br />
+            <span className={styles.accent}>{SLIDES[current].title2}</span>
+          </h1>
+          <p className={styles.sub}>{SLIDES[current].sub}</p>
+          <div className={styles.btns}>
+            <Link href="/contact" className={styles.btnPrimary}>Plan Your Trip</Link>
+            <a href="#destinations" className={styles.btnSecondary}>Explore <span>↓</span></a>
+          </div>
         </div>
-        
-        <div className={styles.stats}>
-          <div className={styles.stat}><span className={styles.num}>50K+</span><span>Happy Travelers</span></div>
-          <div className={styles.stat}><span className={styles.num}>200+</span><span>Curated Escapes</span></div>
-          <div className={styles.stat}><span className={styles.num}>4.9/5</span><span>Average Rating</span></div>
+
+        <div className={styles.statsCard}>
+          <div className={styles.stat}>
+            <span className={styles.num}>50K+</span>
+            <span className={styles.label}>Happy Travelers</span>
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.stat}>
+            <span className={styles.num}>200+</span>
+            <span className={styles.label}>Curated Escapes</span>
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.stat}>
+            <span className={styles.num}>4.9/5</span>
+            <span className={styles.label}>Average Rating</span>
+          </div>
         </div>
       </div>
 
