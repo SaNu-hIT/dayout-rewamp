@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { submitLead } from '../actions';
 import styles from './page.module.css';
+import { EXPERIENCES } from '@/data/experiences';
 
 export default function ContactForm() {
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
@@ -84,13 +85,14 @@ export default function ContactForm() {
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="budget">Estimated Budget</label>
-          <select id="budget" name="budget">
-            <option value="">Select budget range...</option>
-            <option value="low">Under ₹50,000</option>
-            <option value="medium">₹50,000 - ₹1,50,000</option>
-            <option value="high">₹1,50,000 - ₹3,000,000</option>
-            <option value="luxury">₹3,000,000+</option>
+          <label htmlFor="package">Select Package</label>
+          <select id="package" name="package">
+            <option value="">Choose a package...</option>
+            {EXPERIENCES.map((pkg) => (
+              <option key={pkg.slug} value={pkg.slug}>
+                {pkg.title} — {pkg.price}/{pkg.unit} ({pkg.duration})
+              </option>
+            ))}
           </select>
         </div>
       </div>

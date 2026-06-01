@@ -1,4 +1,5 @@
 import './globals.css';
+import EnquiryPopup from '@/components/EnquiryPopup';
 
 export const metadata = {
   title: 'DayOut – Live Every Moment | Premium Goa Travel',
@@ -37,7 +38,10 @@ export default function RootLayout({ children }) {
           })}}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <EnquiryPopup />
+        {children}
+      </body>
     </html>
   );
 }
