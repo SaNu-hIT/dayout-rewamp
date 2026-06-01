@@ -8,18 +8,19 @@ export async function submitLead(formData) {
   const checkIn = formData.get('checkIn');
   const checkOut = formData.get('checkOut');
   const pkg = formData.get('package');
-  const message = formData.get('message');
+
+  const customData = {
+    ...(destination && { destination }),
+    ...(pkg && { package: pkg }),
+    ...(checkIn && { checkin: checkIn }),
+    ...(checkOut && { checkout: checkOut }),
+  };
 
   const payload = {
     name,
     phone,
-    email,
-    customData: {
-      ...(destination && { destination }),
-      ...(pkg && { package: pkg }),
-      ...(checkIn && { checkin: checkIn }),
-      ...(checkOut && { checkout: checkOut }),
-    },
+    ...(email && { email }),
+    ...(Object.keys(customData).length > 0 && { customData }),
   };
 
   try {
@@ -35,9 +36,11 @@ export async function submitLead(formData) {
     if (!res.ok) {
       const text = await res.text();
       console.error('CRM error:', res.status, text);
+      return { success: false, message: 'Something went wrong. Please try again or call us directly.' };
     }
   } catch (err) {
     console.error('CRM request failed:', err);
+    return { success: false, message: 'Unable to reach our system. Please try again later.' };
   }
 
   return { success: true, message: 'Thank you! Your trip request has been received. Our team will contact you shortly.' };

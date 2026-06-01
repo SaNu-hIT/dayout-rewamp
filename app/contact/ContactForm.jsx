@@ -18,7 +18,7 @@ export default function ContactForm() {
         setMessage(response.message);
       } else {
         setStatus('error');
-        setMessage('Something went wrong. Please try again.');
+        setMessage(response.message || 'Something went wrong. Please try again.');
       }
     } catch (error) {
       setStatus('error');
@@ -56,8 +56,8 @@ export default function ContactForm() {
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+          <label htmlFor="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210" />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="destination">Destination Interest</label>
