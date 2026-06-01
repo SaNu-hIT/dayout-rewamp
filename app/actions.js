@@ -14,12 +14,11 @@ export async function submitLead(formData) {
     name,
     phone,
     email,
-    notes: message || '',
     customData: {
       ...(destination && { destination }),
       ...(pkg && { package: pkg }),
-      ...(checkIn && { checkIn }),
-      ...(checkOut && { checkOut }),
+      ...(checkIn && { checkin: checkIn }),
+      ...(checkOut && { checkout: checkOut }),
     },
   };
 
