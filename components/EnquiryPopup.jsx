@@ -16,11 +16,9 @@ export default function EnquiryPopup() {
 
   const close = () => setVisible(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (formData) => {
     setStatus('submitting');
     try {
-      const formData = new FormData(e.target);
       const res = await submitLead(formData);
       if (res.success) {
         setStatus('success');
@@ -55,7 +53,7 @@ export default function EnquiryPopup() {
               <p>Tell us what you're looking for and we'll craft the perfect trip for you.</p>
             </div>
             <div className={styles.body}>
-              <form className={styles.form} onSubmit={handleSubmit}>
+              <form className={styles.form} action={handleSubmit}>
                 <div className={styles.row}>
                   <div className={styles.field}>
                     <label htmlFor="eq-name">Your Name *</label>
