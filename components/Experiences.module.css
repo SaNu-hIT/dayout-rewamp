@@ -14,6 +14,9 @@
   background: var(--card-bg); border: 1px solid var(--border);
   transition: var(--transition);
 }
+.cardLink {
+  display: block; text-decoration: none; color: inherit; cursor: pointer;
+}
 .card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.4); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
 .imgWrap { position: relative; height: 220px; overflow: hidden; }
 .img { object-fit: cover; transition: transform 0.6s ease !important; }

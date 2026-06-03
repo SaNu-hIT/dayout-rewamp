@@ -29,16 +29,16 @@ const LOCAL_BUSINESS_SCHEMA = {
   email: 'dayoutholidays@gmail.com',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Opposite Union Bank, Chakkalakkal Building Rajakumary',
-    addressLocality: 'Rajakumary',
+    streetAddress: '1st Floor, Paikayil Plaza, GAIL Road, Near Kalamassery, HMT Colony, North Kalamassery',
+    addressLocality: 'Kalamassery',
     addressRegion: 'Kerala',
-    postalCode: '685619',
+    postalCode: '683503',
     addressCountry: 'IN',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 9.9312,
-    longitude: 77.1595,
+    latitude: 10.0519,
+    longitude: 76.3119,
   },
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '20:00' },
@@ -80,7 +80,7 @@ export default function ContactPage() {
                 <div className={styles.contactIcon}>📍</div>
                 <div>
                   <h4>Headquarters</h4>
-                  <p>Opposite Union Bank, Chakkalakkal Building Rajakumary, Kerala 685619</p>
+                  <p>1st Floor, Paikayil Plaza, GAIL Road, Near Kalamassery, HMT Colony, North Kalamassery, Kalamassery, Ernakulam, Kochi, Kerala 683503</p>
                 </div>
               </div>
               <div className={styles.contactItem}>

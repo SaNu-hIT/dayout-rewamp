@@ -37,7 +37,7 @@ export default function Experiences() {
       </div>
       <div className={styles.grid}>
         {filtered.map(e => (
-          <article key={e.title} className={`${styles.card} reveal`} aria-label={e.title}>
+          <Link key={e.title} href={`/experiences/${e.slug}`} prefetch={true} className={`${styles.card} ${styles.cardLink} reveal`} aria-label={`View details for ${e.title}`}>
             <div className={styles.imgWrap}>
               <Image src={e.img} alt={e.alt} fill sizes="(max-width:640px) 100vw, 33vw" className={styles.img} />
               <div className={styles.badge}>{e.badge}</div>
@@ -50,10 +50,10 @@ export default function Experiences() {
               <p>{e.desc}</p>
               <div className={styles.footer}>
                 <div className={styles.price}>{e.price} <span>/ {e.unit}</span></div>
-                <Link href={`/experiences/${e.slug}`} prefetch={true} className={styles.btn} aria-label={`View details for ${e.title}`}>→</Link>
+                <span className={styles.btn} aria-hidden="true">→</span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>

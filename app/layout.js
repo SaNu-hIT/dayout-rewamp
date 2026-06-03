@@ -113,10 +113,10 @@ export default function RootLayout({ children }) {
             email: 'dayoutholidays@gmail.com',
             address: {
               '@type': 'PostalAddress',
-              streetAddress: 'Opposite Union Bank, Chakkalakkal Building Rajakumary',
-              addressLocality: 'Rajakumary',
+              streetAddress: '1st Floor, Paikayil Plaza, GAIL Road, Near Kalamassery, HMT Colony, North Kalamassery',
+              addressLocality: 'Kalamassery',
               addressRegion: 'Kerala',
-              postalCode: '685619',
+              postalCode: '683503',
               addressCountry: 'IN',
             },
             logo: {
