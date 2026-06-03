@@ -12,8 +12,24 @@ export async function generateMetadata({ params }) {
   if (!exp) return { title: 'Experience Not Found' };
   
   return {
-    title: `${exp.title} | DayOut Goa`,
+    title: exp.title,
     description: exp.desc,
+    alternates: { canonical: `https://dayoutholidays.com/experiences/${exp.slug}` },
+    openGraph: {
+      title: `${exp.title} | DayOut Goa`,
+      description: exp.desc,
+      url: `https://dayoutholidays.com/experiences/${exp.slug}`,
+      type: 'article',
+      images: exp.image
+        ? [{ url: exp.image, width: 1200, height: 630, alt: exp.title }]
+        : [{ url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: exp.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${exp.title} | DayOut Goa`,
+      description: exp.desc,
+      images: exp.image ? [exp.image] : ['/images/hero-bg.jpg'],
+    },
   };
 }
 

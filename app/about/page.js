@@ -4,9 +4,19 @@ import Image from 'next/image';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: 'About Us | DayOut',
-  description: 'Learn more about DayOut, our mission, and the team behind your unforgettable travel experiences.',
+  title: 'About Us',
+  description:
+    'Learn about DayOut — Goa\'s premium travel & lifestyle brand dedicated to curating unforgettable beach, nature, and cultural experiences across Goa.',
+  alternates: { canonical: 'https://dayoutholidays.com/about' },
+  openGraph: {
+    title: 'About DayOut – Premium Travel & Lifestyle in Goa',
+    description:
+      'Meet the team behind DayOut and discover our mission to make every trip to Goa extraordinary.',
+    url: 'https://dayoutholidays.com/about',
+    images: [{ url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: 'About DayOut' }],
+  },
 };
+
 
 export default function AboutPage() {
   return (

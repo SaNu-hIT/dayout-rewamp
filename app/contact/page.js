@@ -4,9 +4,19 @@ import ContactForm from './ContactForm';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: 'Plan Your Trip | DayOut',
-  description: 'Get in touch with DayOut to plan your next breathtaking adventure.',
+  title: 'Contact Us',
+  description:
+    'Get in touch with DayOut. Plan your perfect Goa trip, enquire about our premium travel experiences, or simply say hello.',
+  alternates: { canonical: 'https://dayoutholidays.com/contact' },
+  openGraph: {
+    title: 'Contact DayOut – Plan Your Goa Trip',
+    description:
+      'Reach out to DayOut for personalised travel planning, experience bookings, and enquiries.',
+    url: 'https://dayoutholidays.com/contact',
+    images: [{ url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: 'Contact DayOut' }],
+  },
 };
+
 
 export default function ContactPage() {
   return (
