@@ -48,6 +48,9 @@
 .link:hover { color: var(--text); }
 .link:hover::after { width: 100%; }
 
+.linkActive { color: var(--yellow) !important; }
+.linkActive::after { width: 100% !important; background: var(--yellow); }
+
 .cta {
   background: var(--yellow); color: var(--dark); font-weight: 700;
   padding: 12px 28px; border-radius: 50px; font-size: 0.9rem;
@@ -56,9 +59,18 @@
   text-transform: uppercase; letter-spacing: 0.5px;
 }
 
-.cta:hover { 
-  background: #fff; transform: translateY(-2px); 
-  box-shadow: 0 8px 25px var(--yellow-glow); 
+.cta:hover {
+  background: #fff; transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--yellow-glow);
+}
+
+.ctaActive {
+  background: #fff;
+  color: var(--dark);
+}
+
+.mobileLinkActive {
+  color: var(--yellow) !important;
 }
 
 .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 10px; }
