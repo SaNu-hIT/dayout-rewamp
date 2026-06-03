@@ -45,7 +45,7 @@ export default function Footer() {
           <div className={styles.contactInfo}>
             <a href="tel:+918848965352">📞 +91 8848965352</a>
             <a href="mailto:dayoutholidays@gmail.com">✉️ dayoutholidays@gmail.com</a>
-            <p>📍 Rajakumary, Kerala 685619</p>
+            <p>📍 1st Floor, Paikayil Plaza, GAIL Road, Near Kalamassery, HMT Colony, North Kalamassery, Kochi, Kerala 683503</p>
           </div>
           <div className={styles.socials} aria-label="Social media links">
             {SOCIALS.map(s => (
