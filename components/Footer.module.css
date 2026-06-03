@@ -7,6 +7,9 @@
 .logoImg { border-radius: 6px; object-fit: contain; }
 .accent { color: var(--yellow); }
 .brand p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+.contactInfo { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+.contactInfo a, .contactInfo p { color: var(--muted); font-size: 0.88rem; text-decoration: none; transition: color 0.2s; }
+.contactInfo a:hover { color: var(--yellow); }
 .socials { display: flex; gap: 12px; margin-top: 24px; }
 .social {
   width: 40px; height: 40px; border-radius: 50%;

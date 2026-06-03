@@ -92,7 +92,16 @@
   .links { gap: 20px; }
 }
 
+.callBtn {
+  display: none;
+  font-size: 1.4rem;
+  text-decoration: none;
+  padding: 6px;
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   .links, .cta { display: none; }
   .hamburger { display: flex; }
+  .callBtn { display: block; }
 }

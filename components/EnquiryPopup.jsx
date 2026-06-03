@@ -4,13 +4,38 @@ import { useEffect, useState } from 'react';
 import { submitLead } from '@/app/actions';
 import styles from './EnquiryPopup.module.css';
 
+const STORAGE_KEY = 'dayout_enquiry_ts';
+const SUPPRESS_HOURS = 24;
+
+function shouldShow() {
+  try {
+    const ts = localStorage.getItem(STORAGE_KEY);
+    if (!ts) return true;
+    const elapsed = (Date.now() - parseInt(ts, 10)) / 3600000;
+    return elapsed >= SUPPRESS_HOURS;
+  } catch {
+    return true;
+  }
+}
+
+function markShown() {
+  try { localStorage.setItem(STORAGE_KEY, String(Date.now())); } catch {}
+}
+
+function markDone() {
+  try { localStorage.setItem(STORAGE_KEY, String(Date.now() + SUPPRESS_HOURS * 3600000 * 30)); } catch {}
+}
+
 export default function EnquiryPopup() {
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | submitting | success
 
   useEffect(() => {
-    // Show popup after a short delay on every load
-    const timer = setTimeout(() => setVisible(true), 1800);
+    if (!shouldShow()) return;
+    const timer = setTimeout(() => {
+      setVisible(true);
+      markShown();
+    }, 1800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -22,6 +47,7 @@ export default function EnquiryPopup() {
       const res = await submitLead(formData);
       if (res.success) {
         setStatus('success');
+        markDone();
       } else {
         setStatus('idle');
       }

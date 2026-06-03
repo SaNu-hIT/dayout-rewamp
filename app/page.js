@@ -5,6 +5,8 @@ import Destinations from '@/components/Destinations';
 import Experiences from '@/components/Experiences';
 import Gallery from '@/components/Gallery';
 import Testimonials from '@/components/Testimonials';
+import Trust from '@/components/Trust';
+import FAQ from '@/components/FAQ';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -19,6 +21,8 @@ export default function Home() {
       <Experiences />
       <Gallery />
       <Testimonials />
+      <Trust />
+      <FAQ />
       <Newsletter />
       <Footer />
       <BackToTop />

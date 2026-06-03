@@ -1,14 +1,15 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Destinations.module.css';
 
 const DESTS = [
-  { img:'/images/goa-beach.jpg',    alt:'Palolem beach Goa with palm trees',           tag:'🇮🇳 Trending',  name:'Palolem, Goa',      meta:'Pristine beaches · Nightlife · Water sports', featured:true },
-  { img:'/images/sunset-beach.jpg', alt:'Vagator sunset beach with rattan lamps',       tag:'🌅 Sunset',    name:'Vagator, Goa',      meta:'Sunset bars · Cliff views · Luxury resorts' },
-  { img:'/images/waterfall.jpg',    alt:'Dudhsagar waterfalls in Goa jungle',           tag:'🌿 Adventure',  name:'Dudhsagar Falls',   meta:'Spectacular falls · Jungle trek · Nature' },
-  { img:'/images/beach-night.jpg',  alt:'Lit beach cabanas on sandy shore at night',    tag:'🌙 Nightlife',  name:'Baga Beach',        meta:'Candlelit dining · Night markets · Live music' },
-  { img:'/images/concert.jpg',      alt:'Fireworks burst over concert festival stage',  tag:'🎵 Festivals',  name:'Anjuna Beach',      meta:'Trance festivals · Fireworks · Crowd energy' },
+  { img:'/images/goa-beach.jpg',    alt:'Palolem beach South Goa — pristine white sand and turquoise sea',           tag:'🇮🇳 Trending',  name:'Palolem, Goa',      meta:'Pristine beaches · Nightlife · Water sports', filter:'beach',    featured:true },
+  { img:'/images/sunset-beach.jpg', alt:'Vagator sunset beach Goa with dramatic cliff views',                         tag:'🌅 Sunset',    name:'Vagator, Goa',      meta:'Sunset bars · Cliff views · Luxury resorts', filter:'beach' },
+  { img:'/images/waterfall.jpg',    alt:'Dudhsagar waterfalls cascading through Goa jungle',                          tag:'🌿 Adventure',  name:'Dudhsagar Falls',   meta:'Spectacular falls · Jungle trek · Nature',   filter:'nature' },
+  { img:'/images/beach-night.jpg',  alt:'Baga Beach nightlife cabanas lit up on sandy shore',                         tag:'🌙 Nightlife',  name:'Baga Beach',        meta:'Candlelit dining · Night markets · Live music', filter:'nightlife' },
+  { img:'/images/concert.jpg',      alt:'Anjuna Beach festival with fireworks over the stage',                        tag:'🎵 Festivals',  name:'Anjuna Beach',      meta:'Trance festivals · Fireworks · Crowd energy', filter:'festival' },
 ];
 
 export default function Destinations() {
@@ -37,6 +38,13 @@ export default function Destinations() {
               <span className={styles.tag}>{d.tag}</span>
               <h3 className={styles.name}>{d.name}</h3>
               <p className={styles.meta}>{d.meta}</p>
+              <Link
+                href={`/#experiences`}
+                className={styles.ctaBtn}
+                aria-label={`View packages for ${d.name}`}
+              >
+                View Packages →
+              </Link>
             </div>
             <div className={styles.arrow} aria-hidden="true">→</div>
           </article>

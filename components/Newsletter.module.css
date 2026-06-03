@@ -26,4 +26,16 @@
 }
 .btn:hover { background: #fff; }
 .note { margin-top: 16px; font-size: 0.8rem; color: var(--muted); }
+.successMsg {
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  color: #25D366;
+  border-radius: 50px;
+  padding: 16px 28px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+.errorMsg { color: #ff6b6b; font-size: 0.88rem; margin-top: 8px; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
 @media (max-width: 640px) { .form { flex-direction: column; } }

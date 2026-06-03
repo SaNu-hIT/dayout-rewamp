@@ -18,9 +18,44 @@ export const metadata = {
 };
 
 
+const LOCAL_BUSINESS_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://dayoutholidays.com',
+  name: 'DayOut Holidays',
+  description: 'Premium Goa travel packages — beaches, waterfalls, adventures, and festivals.',
+  url: 'https://dayoutholidays.com',
+  telephone: '+918848965352',
+  email: 'dayoutholidays@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Opposite Union Bank, Chakkalakkal Building Rajakumary',
+    addressLocality: 'Rajakumary',
+    addressRegion: 'Kerala',
+    postalCode: '685619',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 9.9312,
+    longitude: 77.1595,
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '10:00', closes: '18:00' },
+  ],
+  priceRange: '₹₹',
+  areaServed: 'Goa, India',
+  sameAs: [
+    'https://www.instagram.com/dayout_holidays/',
+    'https://www.facebook.com/p/Dayout-Holidays-100087241266220/',
+  ],
+};
+
 export default function ContactPage() {
   return (
     <main className={styles.main}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(LOCAL_BUSINESS_SCHEMA)}} />
       <Navbar />
       <section className={styles.hero}>
         <div className={styles.heroBg} />

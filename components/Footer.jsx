@@ -20,17 +20,16 @@ const EXPS = [
 
 const COMP = [
   { name: 'About Us', href: '/about' },
-  { name: 'Blog', href: '#' },
-  { name: 'Careers', href: '#' },
-  { name: 'Press', href: '#' },
+  { name: 'FAQ', href: '/#faq' },
+  { name: 'Privacy Policy', href: '/privacy' },
+  { name: 'Terms of Service', href: '/terms' },
   { name: 'Contact', href: '/contact' },
 ];
 
 const SOCIALS = [
-  { emoji:'📘', label:'Facebook', href: '#' },
-  { emoji:'📸', label:'Instagram', href: '#' },
-  { emoji:'▶', label:'YouTube', href: '#' },
-  { emoji:'💬', label:'WhatsApp', href: 'https://wa.me/918848965352' },
+  { icon: 'FB', label: 'Facebook', href: 'https://www.facebook.com/p/Dayout-Holidays-100087241266220/' },
+  { icon: 'IG', label: 'Instagram', href: 'https://www.instagram.com/dayout_holidays/' },
+  { icon: 'WA', label: 'WhatsApp', href: 'https://wa.me/918848965352' },
 ];
 
 export default function Footer() {
@@ -43,14 +42,23 @@ export default function Footer() {
             <span>Day<span className={styles.accent}>Out</span></span>
           </Link>
           <p>At Dayout Holidays, we bring you the best of Goa with tailor-made packages that combine adventure, relaxation, and unmatched service.</p>
-          <div className={styles.contactInfo} style={{ marginTop: '16px', fontSize: '0.9rem', color: 'var(--muted)' }}>
-            <p>📞 +91 8848965352</p>
-            <p>✉️ dayoutholidays@gmail.com</p>
+          <div className={styles.contactInfo}>
+            <a href="tel:+918848965352">📞 +91 8848965352</a>
+            <a href="mailto:dayoutholidays@gmail.com">✉️ dayoutholidays@gmail.com</a>
             <p>📍 Rajakumary, Kerala 685619</p>
           </div>
           <div className={styles.socials} aria-label="Social media links">
             {SOCIALS.map(s => (
-              <a key={s.label} href={s.href} className={styles.social} aria-label={s.label}>{s.emoji}</a>
+              <a
+                key={s.label}
+                href={s.href}
+                className={styles.social}
+                aria-label={s.label}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.icon}
+              </a>
             ))}
           </div>
         </div>
@@ -68,11 +76,10 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.bottom}>
-        <p>© 2026 DayOut Travel. All rights reserved.</p>
+        <p>© 2026 DayOut Holidays. All rights reserved.</p>
         <div className={styles.bottomLinks}>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms of Service</Link>
         </div>
       </div>
     </footer>

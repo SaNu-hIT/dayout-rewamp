@@ -45,3 +45,37 @@ export async function submitLead(formData) {
 
   return { success: true, message: 'Thank you! Your trip request has been received. Our team will contact you shortly.' };
 }
+
+export async function subscribeNewsletter(email) {
+  if (!email || !email.includes('@')) {
+    return { success: false, message: 'Please provide a valid email address.' };
+  }
+
+  const payload = {
+    name: 'Newsletter Subscriber',
+    phone: 'N/A',
+    email,
+    customData: { source: 'newsletter' },
+  };
+
+  try {
+    const res = await fetch(process.env.TRAVEL_CRM_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.TRAVEL_CRM_API_KEY,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      console.error('Newsletter CRM error:', res.status, await res.text());
+      return { success: false, message: 'Subscription failed. Please try again.' };
+    }
+  } catch (err) {
+    console.error('Newsletter CRM request failed:', err);
+    return { success: false, message: 'Unable to subscribe. Please try again later.' };
+  }
+
+  return { success: true };
+}

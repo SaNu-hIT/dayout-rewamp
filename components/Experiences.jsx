@@ -41,6 +41,9 @@ export default function Experiences() {
             <div className={styles.imgWrap}>
               <Image src={e.img} alt={e.alt} fill sizes="(max-width:640px) 100vw, 33vw" className={styles.img} />
               <div className={styles.badge}>{e.badge}</div>
+              {e.slotsLeft <= 5 && (
+                <div className={styles.slots}>🔥 Only {e.slotsLeft} slots left</div>
+              )}
             </div>
             <div className={styles.body}>
               <h3>{e.title}</h3>

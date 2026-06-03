@@ -54,6 +54,7 @@ export default function Navbar() {
           ))}
         </ul>
         <Link href="/contact" prefetch={true} className={styles.cta}>Plan Your Trip</Link>
+        <a href="tel:+918848965352" className={styles.callBtn} aria-label="Call us">📞</a>
         <button className={styles.hamburger} id="hamburger" onClick={() => setMobileOpen(true)} aria-label="Open menu">
           <span/><span/><span/>
         </button>
