@@ -6,6 +6,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
 
+export async function generateStaticParams() {
+  return EXPERIENCES.map((exp) => ({ slug: exp.slug }));
+}
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const exp = EXPERIENCES.find((e) => e.slug === resolvedParams.slug);

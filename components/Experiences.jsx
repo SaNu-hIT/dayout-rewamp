@@ -47,7 +47,7 @@ export default function Experiences() {
               <p>{e.desc}</p>
               <div className={styles.footer}>
                 <div className={styles.price}>{e.price} <span>/ {e.unit}</span></div>
-                <Link href={`/experiences/${e.slug}`} className={styles.btn} aria-label={`View details for ${e.title}`}>→</Link>
+                <Link href={`/experiences/${e.slug}`} prefetch={true} className={styles.btn} aria-label={`View details for ${e.title}`}>→</Link>
               </div>
             </div>
           </article>

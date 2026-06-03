@@ -53,7 +53,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <Link href="/contact" className={styles.cta}>Plan Your Trip</Link>
+        <Link href="/contact" prefetch={true} className={styles.cta}>Plan Your Trip</Link>
         <button className={styles.hamburger} id="hamburger" onClick={() => setMobileOpen(true)} aria-label="Open menu">
           <span/><span/><span/>
         </button>
@@ -62,8 +62,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div className={styles.mobileNav} role="dialog" aria-modal="true">
           <button className={styles.mobileClose} onClick={() => setMobileOpen(false)} aria-label="Close menu">✕</button>
-          <Link href="/" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Home</Link>
-          <Link href="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About Us</Link>
+          <Link href="/" prefetch={true} className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Home</Link>
+          <Link href="/about" prefetch={true} className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About Us</Link>
           {navLinks.map(link => (
             <Link 
               key={link.id}
@@ -74,7 +74,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          <Link href="/contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)} style={{ color: 'var(--yellow)', marginTop: '20px' }}>
+          <Link href="/contact" prefetch={true} className={styles.mobileLink} onClick={() => setMobileOpen(false)} style={{ color: 'var(--yellow)', marginTop: '20px' }}>
             Plan Your Trip
           </Link>
         </div>
