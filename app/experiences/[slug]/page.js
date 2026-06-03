@@ -153,7 +153,7 @@ export default async function ExperienceDetail({ params }) {
                 💬 WhatsApp Us
               </a>
               <p className={styles.guarantee}>
-                🔒 Secure booking • Free cancellation up to 48 hours before.
+                🔒 Secure booking • Advance payment is non-refundable.
               </p>
             </div>
           </div>

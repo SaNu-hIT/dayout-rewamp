@@ -29,7 +29,7 @@ const FAQS = [
   },
   {
     q: 'What is your cancellation policy?',
-    a: 'Cancellations made 48 hours or more before the trip start date are fully refunded. Cancellations within 48 hours may incur a partial charge depending on pre-booked services. We also offer free rescheduling once per booking. Full terms are on our Terms of Service page.',
+    a: 'All advance payments are non-refundable. In the event of a cancellation, the advance amount paid at the time of booking will not be returned. We recommend planning carefully before confirming your booking. Full terms are on our Terms of Service page.',
   },
   {
     q: 'Do you offer group and student discounts?',

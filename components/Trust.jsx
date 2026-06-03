@@ -3,13 +3,13 @@ import styles from './Trust.module.css';
 const STATS = [
   { value: '50K+', label: 'Happy Travelers' },
   { value: '4.9★', label: 'Average Rating' },
-  { value: '12+', label: 'Years Experience' },
+  { value: '4+', label: 'Years Experience' },
   { value: '200+', label: 'Curated Escapes' },
 ];
 
 const BADGES = [
   { icon: '🛡️', text: '100% Secure Booking' },
-  { icon: '✈️', text: 'Free Cancellation' },
+  { icon: '📋', text: 'Advance Non-Refundable' },
   { icon: '🏆', text: 'Award-Winning Service' },
   { icon: '📞', text: '24/7 Support' },
 ];

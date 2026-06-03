@@ -23,12 +23,8 @@ export default function TermsPage() {
         <p>All bookings are subject to availability. A booking is confirmed only after we receive a confirmation from our team and an advance payment (where applicable). Prices are in Indian Rupees (INR) and are per person unless stated otherwise.</p>
 
         <h2>3. Cancellation Policy</h2>
-        <ul>
-          <li><strong>48+ hours before trip:</strong> Full refund of advance payment.</li>
-          <li><strong>24–48 hours before trip:</strong> 50% of advance payment retained.</li>
-          <li><strong>Less than 24 hours / No show:</strong> Advance payment forfeited.</li>
-        </ul>
-        <p>Pre-booked third-party services (flights, certain hotels) may have their own cancellation policies which override ours. We will communicate these clearly at booking.</p>
+        <p>All advance payments made at the time of booking are <strong>non-refundable</strong>. Regardless of when a cancellation is made, the advance amount will not be returned under any circumstances.</p>
+        <p>Pre-booked third-party services (flights, certain hotels) may have their own cancellation policies. We will communicate these clearly at booking.</p>
 
         <h2>4. Rescheduling</h2>
         <p>You may reschedule your trip once at no charge, provided you notify us at least 48 hours in advance and subject to availability at the new dates.</p>

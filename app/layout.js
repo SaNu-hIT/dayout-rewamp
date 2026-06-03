@@ -14,7 +14,7 @@ const FAQ_SCHEMA = {
     { '@type': 'Question', name: 'What is the best time to visit Goa?', acceptedAnswer: { '@type': 'Answer', text: 'October to February is peak season with ideal weather. March–May offers fewer crowds and better deals. June–September is monsoon — great for waterfalls and lush scenery.' } },
     { '@type': 'Question', name: 'Do you arrange airport transfers?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, all our packages include or optionally include private AC cab transfers from Goa airport to your hotel and back.' } },
     { '@type': 'Question', name: 'Can I customise my itinerary?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. Every trip is tailored to you. Add or remove activities, upgrade accommodation, or extend your stay. WhatsApp us and we respond within 24 hours.' } },
-    { '@type': 'Question', name: 'What is your cancellation policy?', acceptedAnswer: { '@type': 'Answer', text: 'Cancellations 48+ hours before the trip receive a full refund. Within 48 hours may incur a partial charge. We also offer free rescheduling once per booking.' } },
+    { '@type': 'Question', name: 'What is your cancellation policy?', acceptedAnswer: { '@type': 'Answer', text: 'All advance payments are non-refundable. The advance amount paid at the time of booking will not be returned in the event of a cancellation.' } },
     { '@type': 'Question', name: 'Do you offer group discounts?', acceptedAnswer: { '@type': 'Answer', text: 'Yes — groups of 10+ get special rates. We have dedicated Student Group and College packages from ₹3,599/person. Contact us for a group quotation.' } },
   ],
 };
