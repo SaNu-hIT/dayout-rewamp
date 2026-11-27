@@ -2,34 +2,25 @@ import Script from 'next/script';
 import './globals.css';
 import EnquiryPopup from '@/components/EnquiryPopup';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
-import { FAQS } from '@/data/faqs';
 
 const BASE_URL = 'https://dayoutholidays.com';
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
-const FAQ_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQS.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
+const SITE_TITLE = 'DayOut Holidays — Trips across India, planned from Kochi';
+const SITE_DESCRIPTION =
+  'Trips across India, planned end to end by our team in Kochi: Ladakh, Kashmir and Rajasthan in the North; Kerala, Goa and the islands in the South.';
 
 export const metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    default: 'DayOut – Premium Travel & Lifestyle in Goa',
-    template: '%s | DayOut Goa',
+    default: 'DayOut Holidays — Trips across India, planned from Kochi',
+    template: '%s | DayOut Holidays',
   },
-  description:
-    'Discover Goa\'s most unforgettable experiences — pristine beaches, hidden waterfalls, vibrant festivals, and adventure trails. DayOut is your premium travel & lifestyle guide to Goa.',
+  description: SITE_DESCRIPTION,
   keywords: [
-    'Goa travel', 'Goa tourism', 'Goa beaches', 'Goa adventures', 'Goa waterfalls',
-    'Goa festivals', 'premium travel Goa', 'DayOut', 'travel lifestyle', 'Goa experiences',
-    'things to do in Goa', 'Goa trip planner', 'Goa holiday packages', 'Goa tour operator',
+    'DayOut Holidays', 'travel agency Kochi', 'India tour packages', 'North India tours',
+    'South India tours', 'Ladakh trip', 'Kashmir tour', 'Kerala backwaters', 'Goa holiday packages',
+    'Munnar tour', 'Rajasthan tour', 'tour operator Kerala',
   ],
   authors: [{ name: 'DayOut Travel', url: BASE_URL }],
   creator: 'DayOut Travel',
@@ -54,11 +45,10 @@ export const metadata = {
     locale: 'en_IN',
     url: BASE_URL,
     siteName: 'DayOut',
-    title: 'DayOut – Premium Travel & Lifestyle in Goa',
-    description:
-      'Discover Goa\'s most unforgettable experiences — pristine beaches, hidden waterfalls, vibrant festivals, and adventure trails.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
-      { url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: 'DayOut – Premium Travel & Lifestyle in Goa' },
+      { url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: SITE_TITLE },
     ],
   },
 
@@ -66,8 +56,8 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@dayout_holidays',
     creator: '@dayout_holidays',
-    title: 'DayOut – Premium Travel & Lifestyle in Goa',
-    description: 'Your premium guide to Goa\'s most unforgettable beaches, waterfalls, and adventures.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ['/images/hero-bg.jpg'],
   },
 
@@ -105,7 +95,7 @@ export default function RootLayout({ children }) {
             '@type': 'TravelAgency',
             name: 'DayOut',
             alternateName: 'DayOut Holidays',
-            description: 'Premium travel & lifestyle experiences in Goa — beaches, waterfalls, festivals and adventures.',
+            description: SITE_DESCRIPTION,
             url: BASE_URL,
             telephone: '+918848965352',
             email: 'dayoutholidays@gmail.com',
@@ -124,11 +114,7 @@ export default function RootLayout({ children }) {
               height: 60,
             },
             image: `${BASE_URL}/images/hero-bg.jpg`,
-            areaServed: {
-              '@type': 'State',
-              name: 'Goa',
-              addressCountry: 'IN',
-            },
+            areaServed: { '@type': 'Country', name: 'India' },
             contactPoint: {
               '@type': 'ContactPoint',
               telephone: '+918848965352',
@@ -141,12 +127,6 @@ export default function RootLayout({ children }) {
               'https://www.facebook.com/p/Dayout-Holidays-100087241266220/',
             ],
           })}}
-        />
-
-        {/* FAQPage structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{__html: JSON.stringify(FAQ_SCHEMA)}}
         />
       </head>
       <body>

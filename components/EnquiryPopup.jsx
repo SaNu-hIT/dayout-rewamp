@@ -65,7 +65,7 @@ export default function EnquiryPopup() {
           <div className={styles.success}>
             <div className={styles.successIcon}>✓</div>
             <h3>We got your enquiry!</h3>
-            <p>Our team will reach out to you shortly. Get ready for an unforgettable Goa experience.</p>
+            <p>Our team will reach out to you shortly. We’ll send a plan built around your dates.</p>
             <button className={styles.closeSuccessBtn} onClick={close}>
               Explore DayOut
             </button>
@@ -75,8 +75,8 @@ export default function EnquiryPopup() {
             <div className={styles.header}>
               <button className={styles.closeBtn} onClick={close} aria-label="Close">×</button>
               <div className={styles.badge}>Limited Slots Available</div>
-              <h2>Plan Your Goa Getaway</h2>
-              <p>Tell us what you're looking for and we'll craft the perfect trip for you.</p>
+              <h2>Plan your trip</h2>
+              <p>Tell us what you’re looking for and we’ll craft the perfect trip for you.</p>
             </div>
             <div className={styles.body}>
               <form className={styles.form} action={handleSubmit}>
@@ -94,10 +94,10 @@ export default function EnquiryPopup() {
                   <label htmlFor="eq-destination">Where do you want to go?</label>
                   <select id="eq-destination" name="destination">
                     <option value="">Select a destination...</option>
-                    <option value="north_goa">North Goa (Baga, Calangute)</option>
-                    <option value="south_goa">South Goa (Palolem, Colva)</option>
-                    <option value="central_goa">Central Goa (Panaji, Old Goa)</option>
-                    <option value="dudhsagar">Dudhsagar / Wildlife</option>
+                    <option value="north_india">North India (Ladakh, Kashmir, Rajasthan)</option>
+                    <option value="kerala">Kerala (Munnar, Alleppey)</option>
+                    <option value="goa">Goa</option>
+                    <option value="south_india">Rest of South India and islands</option>
                     <option value="other">Not sure yet — surprise me!</option>
                   </select>
                 </div>
@@ -110,7 +110,7 @@ export default function EnquiryPopup() {
                 </button>
               </form>
               <span className={styles.skipLink} onClick={close}>
-                No thanks, I'll browse on my own
+                No thanks, I’ll browse on my own
               </span>
             </div>
           </>

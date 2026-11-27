@@ -2,7 +2,7 @@ export default function manifest() {
   return {
     name: 'DayOut Holidays',
     short_name: 'DayOut',
-    description: 'Premium Goa Travel & Lifestyle — beaches, waterfalls, festivals and adventures.',
+    description: 'Trips across India, planned end to end from Kochi.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0A0A0F',
