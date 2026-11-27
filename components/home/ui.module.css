@@ -1,0 +1,126 @@
+/* Shared type and layout for the Day → Out home sections. */
+
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  composes: mono;
+  font-size: var(--fs-label);
+  color: var(--sun-ink);
+}
+.eyebrowNight {
+  composes: mono;
+  font-size: var(--fs-label);
+  color: var(--yellow);
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.h2Small {
+  composes: h2;
+  font-size: var(--fs-h2-sm);
+}
+
+.lead {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted-day);
+}
+.leadNight {
+  composes: lead;
+  color: var(--muted-night);
+}
+
+.section {
+  position: relative;
+  padding: var(--space-section) var(--gutter) var(--space-section) var(--rail-gutter);
+}
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.headStack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 680px;
+}
+
+.pillSun {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--dark);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  transition: background var(--transition), color var(--transition);
+}
+.pillSun:hover { background: var(--paper); }
+
+.pillGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-ghost);
+  color: var(--paper);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  transition: border-color var(--transition), color var(--transition);
+}
+.pillGhost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+.pillSun:focus-visible,
+.pillGhost:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+/* Fade-up on enter. Progressive: browsers without scroll timelines show content as is. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Slow rotation for sun rays. Duration comes from --spin. */
+.spin {
+  animation: spin var(--spin, 24s) linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spin { animation: none; }
+}
+
+/* Page wrapper: Outfit body copy on sand; clip the sideways palm shadows. */
+.home {
+  background: var(--sand);
+  color: var(--dark);
+  overflow-x: clip;
+}
+.home section[id] { scroll-margin-top: 72px; }

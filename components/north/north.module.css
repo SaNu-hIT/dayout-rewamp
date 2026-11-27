@@ -1,0 +1,378 @@
+/* North India — the altitude route. */
+
+.svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ---- 80 m: hero ---- */
+.hero {
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  color: var(--foam);
+  background: var(--north-night);
+}
+.heroPhoto { object-fit: cover; object-position: center 35%; }
+.heroScrim { position: absolute; inset: 0; background: var(--scrim-north-hero); }
+.focus {
+  position: absolute;
+  left: 50%;
+  top: 90px;
+  width: min(1100px, 100%);
+  height: 640px;
+  transform: translateX(-50%);
+  background: var(--scrim-north-focus);
+  z-index: 1;
+}
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+  padding: 150px var(--gutter) 0;
+}
+.chip {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-label);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--scrim-chip);
+}
+.title {
+  font-size: var(--fs-display);
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  display: flex;
+  align-items: center;
+}
+.titleSun { width: 0.86em; height: 0.86em; margin: 0 0.01em; overflow: visible; color: var(--yellow); }
+.heroLead { max-width: 600px; font-size: var(--fs-lead); line-height: 1.5; }
+.heroFoot {
+  position: absolute;
+  left: var(--rail-gutter);
+  right: var(--gutter);
+  bottom: 28px;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+/* Layered depth: far photo drifts slowest, near ridges fastest. Scroll-driven, no JS. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .depthFar, .depthMid, .depthNear {
+      animation: linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 900px;
+    }
+    .depthFar { animation-name: dFar; }
+    .depthMid { animation-name: dMid; }
+    .depthNear { animation-name: dNear; }
+  }
+}
+@keyframes dFar { to { transform: translateY(220px) scale(1.1); } }
+@keyframes dMid { to { transform: translateY(110px); } }
+@keyframes dNear { to { transform: translateY(30px); } }
+
+/* ---- Climb: cards rise with real altitude ---- */
+.climb {
+  overflow: hidden;
+  padding-right: 0;
+}
+.contours {
+  position: absolute;
+  right: -200px;
+  top: -120px;
+  width: 1300px;
+  height: 820px;
+  pointer-events: none;
+  stroke: var(--line-sand);
+}
+.climbHead { position: relative; max-width: 1376px; padding-right: var(--gutter); }
+.cards {
+  --climb: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px var(--gutter) 24px 0;
+}
+.card {
+  flex: 0 0 290px;
+  height: 400px;
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  color: var(--foam);
+  background: var(--north-card);
+  margin-top: calc(var(--drop) * var(--climb));
+}
+.cardScrim { position: absolute; inset: 0; background: var(--scrim-card); }
+.altChip {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-micro);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--dark);
+}
+.cardText { position: absolute; left: 20px; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 4px; }
+.cardRegion {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--on-photo);
+}
+.cardName { font-size: var(--fs-h3); font-weight: 600; }
+.cardBlurb { font-size: var(--fs-small); color: var(--on-photo); }
+.scale {
+  position: relative;
+  display: flex;
+  max-width: 1376px;
+  padding-right: var(--gutter);
+  font-size: var(--fs-micro);
+  color: var(--muted-day);
+}
+.scaleLine { flex: 1; margin: 7px 16px 0; border-top: 1px dashed var(--trail-line); }
+
+/* ---- Base camp ---- */
+.split { display: flex; flex-wrap: wrap; gap: 64px; }
+.splitCopy { flex: 1 1 420px; display: flex; flex-direction: column; gap: 14px; }
+.stack {
+  position: relative;
+  height: 300px;
+  max-width: 460px;
+  margin-top: 48px;
+  perspective: 1200px;
+}
+.stackItem {
+  position: absolute;
+  width: 46%;
+  height: 240px;
+  border-radius: 14px;
+  border: 6px solid var(--paper);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.5s var(--ease-swell);
+}
+.stackItem img { object-fit: cover; }
+.stackItem:nth-child(1) { left: 0; top: 34px; transform: rotateY(20deg) rotate(-7deg); }
+.stackItem:nth-child(2) { right: 0; top: 40px; transform: rotateY(-20deg) rotate(7deg); }
+.stackItem:nth-child(3) { left: 27%; top: 0; height: 260px; transform: translateZ(40px) rotate(2deg); box-shadow: var(--shadow-lift); }
+.stack:hover .stackItem { transform: none; }
+
+/* ---- Grades ---- */
+.gradeTop { display: flex; align-items: flex-end; gap: 16px; }
+.profile { overflow: visible; color: var(--dark); }
+.profileArea { fill: currentColor; opacity: 0.12; }
+.profileLine { fill: none; stroke: currentColor; stroke-width: 3; stroke-linejoin: round; transition: d 0.5s var(--ease-swell); }
+.profileSunCore { fill: var(--yellow); stroke: currentColor; }
+.gradeMax {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.gradeMaxValue { display: block; font-size: 16px; font-weight: 500; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+.filter {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--dark);
+  border: 1.5px solid var(--dark);
+  transition: background var(--transition), color var(--transition);
+}
+.filter[aria-pressed='true'] { background: var(--dark); color: var(--yellow); }
+.filter:hover { background: var(--yellow-dark); }
+.filter[aria-pressed='true']:hover { background: var(--ink-3); }
+
+.passes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr)); gap: 24px; }
+.pass {
+  display: grid;
+  --stub: 176px;
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) var(--stub);
+  background: var(--dark);
+  color: var(--foam);
+  border-radius: var(--radius-card);
+  min-height: 260px;
+}
+.passMain { padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; }
+.passTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--muted-night);
+}
+.passBrand { color: var(--yellow); }
+.passName { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.01em; }
+.passDesc { font-size: var(--fs-small); line-height: 1.55; color: var(--muted-night); }
+.specs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-night);
+}
+.specLabel {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--faint-night);
+}
+.specValue { margin-top: 4px; font-size: var(--fs-small); font-weight: 500; }
+.stub {
+  position: relative;
+  border-left: 2px dashed var(--line-night);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  overflow: hidden;
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.stub > img { object-fit: cover; }
+.stubScrim { position: absolute; inset: 0; background: var(--scrim-pass); }
+.stubBody { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.price { margin-top: 6px; font-size: var(--fs-swell-price); font-weight: 600; color: var(--yellow); letter-spacing: -0.02em; }
+.enquire { min-height: 44px; padding: 0 18px; }
+.punch {
+  position: absolute;
+  right: calc(var(--stub) - 14px);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  z-index: 1;
+}
+.punchTop { top: -13px; }
+.punchBottom { bottom: -13px; }
+
+/* ---- Treeline ---- */
+.treeline {
+  position: relative;
+  height: 720px;
+  overflow: hidden;
+  background: var(--north-treeline);
+}
+.treeTop, .treeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.treeTop { top: 0; align-items: flex-start; padding: 72px var(--gutter) 0 var(--rail-gutter); color: var(--dark); }
+.treeBottom { bottom: 0; align-items: flex-end; padding: 0 var(--gutter) 64px var(--rail-gutter); color: var(--foam); }
+.treeEyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-label);
+  color: var(--sun-ink);
+}
+.treeWord { font-size: var(--fs-h2); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.treeNote {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-label);
+  color: var(--north-mist);
+}
+.yellow { color: var(--yellow); }
+
+/* ---- Himalaya ---- */
+.flagsTop { position: absolute; top: 40px; left: 0; width: 100%; height: 60px; }
+.flagLine { fill: none; stroke: var(--line-ghost); stroke-width: 1; opacity: 0.6; }
+.flag {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: flutter 2.4s ease-in-out infinite alternate;
+}
+@keyframes flutter { from { transform: skewX(-6deg); } to { transform: skewX(6deg); } }
+.regions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
+.region {
+  position: relative;
+  height: 460px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--north-card);
+}
+.regionFront { fill: var(--north-night); opacity: 0.92; }
+.regionCap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  background: var(--scrim-north-card);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.regionAlt {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  color: var(--yellow);
+}
+.regionName { font-size: var(--fs-h3); font-weight: 600; }
+.regionBlurb { font-size: var(--fs-small); color: var(--north-mist); }
+.regionSeason {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--north-faint);
+}
+
+/* ---- Summit footer flags ---- */
+.flagsSummit { position: absolute; top: 0; left: 0; width: 100%; height: 120px; }
+
+@media (max-width: 900px) {
+  .hero { min-height: 760px; }
+  .heroCopy { padding-top: 120px; }
+  .cards { --climb: 0.3; }
+  .profile { width: 200px; height: 100px; }
+  .pass { grid-template-columns: 1fr; }
+  .stub {
+    border-left: 0;
+    border-top: 2px dashed var(--line-night);
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+  }
+  .stubBody { flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; width: 100%; }
+  .punch { display: none; }
+  .treeline { height: 600px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flag, .stackItem, .profileLine { animation: none; transition: none; }
+}

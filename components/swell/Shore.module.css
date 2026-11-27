@@ -1,0 +1,67 @@
+.body { background: var(--sea-deep); }
+
+.photo {
+  object-fit: cover;
+  object-position: center 60%;
+  animation: drift 24s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: scale(1.1) rotate(-1deg); }
+  to { transform: scale(1.02) rotate(1deg); }
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-shore);
+}
+
+.copy {
+  position: absolute;
+  left: var(--swell-edge);
+  top: 230px;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: var(--fs-swell-hero);
+  line-height: 0.92;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+.lead {
+  font-size: var(--fs-swell-lead);
+  max-width: 540px;
+}
+
+.ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cue {
+  position: absolute;
+  left: var(--swell-edge);
+  bottom: 150px;
+  font-size: var(--fs-micro);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cueGlyph { width: 28px; height: 12px; color: var(--yellow); }
+
+@media (max-width: 900px) {
+  .copy { left: var(--gutter); right: var(--gutter); top: auto; bottom: calc(var(--crest-h) + 24px); }
+  .scrim { background: var(--scrim-shore-tall); }
+  .cue { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo { animation: none; }
+}

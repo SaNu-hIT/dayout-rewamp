@@ -2,6 +2,7 @@ import Script from 'next/script';
 import './globals.css';
 import EnquiryPopup from '@/components/EnquiryPopup';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import { FAQS } from '@/data/faqs';
 
 const BASE_URL = 'https://dayoutholidays.com';
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -9,14 +10,11 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const FAQ_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    { '@type': 'Question', name: 'How much does a Goa trip cost?', acceptedAnswer: { '@type': 'Answer', text: 'Our packages start from ₹3,599 per person for budget trips up to ₹7,000 per person for premium getaways. Contact us for a custom quote.' } },
-    { '@type': 'Question', name: 'What is the best time to visit Goa?', acceptedAnswer: { '@type': 'Answer', text: 'October to February is peak season with ideal weather. March–May offers fewer crowds and better deals. June–September is monsoon — great for waterfalls and lush scenery.' } },
-    { '@type': 'Question', name: 'Do you arrange airport transfers?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, all our packages include or optionally include private AC cab transfers from Goa airport to your hotel and back.' } },
-    { '@type': 'Question', name: 'Can I customise my itinerary?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. Every trip is tailored to you. Add or remove activities, upgrade accommodation, or extend your stay. WhatsApp us and we respond within 24 hours.' } },
-    { '@type': 'Question', name: 'What is your cancellation policy?', acceptedAnswer: { '@type': 'Answer', text: 'All advance payments are non-refundable. The advance amount paid at the time of booking will not be returned in the event of a cancellation.' } },
-    { '@type': 'Question', name: 'Do you offer group discounts?', acceptedAnswer: { '@type': 'Answer', text: 'Yes — groups of 10+ get special rates. We have dedicated Student Group and College packages from ₹3,599/person. Contact us for a group quotation.' } },
-  ],
+  mainEntity: FAQS.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
 };
 
 export const metadata = {

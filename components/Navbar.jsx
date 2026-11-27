@@ -32,9 +32,9 @@ export default function Navbar() {
 
   const sectionLinks = [
     { name: 'Destinations', id: 'destinations' },
-    { name: 'Experiences', id: 'experiences' },
-    { name: 'Gallery', id: 'gallery' },
-    { name: 'Testimonials', id: 'testimonials' },
+    { name: 'Packages', id: 'packages' },
+    { name: 'Stories', id: 'stories' },
+    { name: 'FAQ', id: 'faq' },
   ];
 
   const isActive = (href) => pathname === href;

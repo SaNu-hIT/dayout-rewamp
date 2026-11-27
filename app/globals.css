@@ -14,6 +14,171 @@
   --muted: #8888AA;
   --radius: 16px;
   --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+
+  /* Day → Out home */
+  --sand: #FAF6EC;
+  --paper: #FFFFFF;
+  --line-sand: #E2DACA;
+  --ink-2: #14141C;
+  --ink-3: #1F1F29;
+  --ink-4: #24242E;
+  --ember: #F0A04B;
+  --sun-ink: #6B5200;      /* sun-toned text on sand/white, 6.9:1 */
+  --sun-deep: #2A2410;     /* body text on --yellow */
+  --muted-day: #55555F;    /* secondary text on sand/white */
+  --muted-night: #B9B9C6;  /* secondary text on --dark */
+  --faint-night: #9C9CAA;  /* labels on --dark */
+  --shadow-leaf: #3A2A08;
+
+  --fs-display: clamp(88px, 15vw, 220px);
+  --fs-h2: clamp(36px, 5vw, 64px);
+  --fs-h2-sm: clamp(32px, 4vw, 48px);
+  --fs-h3: 26px;
+  --fs-lead: 20px;
+  --fs-body: 17px;
+  --fs-small: 15px;
+  --fs-label: 13px;
+  --fs-micro: 11px;
+
+  --space-section: clamp(72px, 10vw, 120px);
+  --gutter: 24px;
+  --rail-gutter: 96px;     /* room for the fixed day rail on desktop */
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --line-night: rgba(255, 255, 255, 0.14);
+  --line-ghost: rgba(255, 255, 255, 0.6);
+  --on-photo: rgba(255, 255, 255, 0.9);
+  --scrim-card: linear-gradient(180deg, rgba(10, 10, 15, 0) 40%, rgba(10, 10, 15, 0.85) 100%);
+  --scrim-hero: linear-gradient(180deg, rgba(10, 10, 15, 0.35) 0%, rgba(10, 10, 15, 0.15) 40%, rgba(10, 10, 15, 0.75) 100%);
+  --scrim-hero-night: linear-gradient(180deg, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.35) 40%, rgba(10, 10, 15, 0.85) 100%);
+  --scrim-focus: radial-gradient(closest-side, rgba(10, 10, 15, 0.65), rgba(10, 10, 15, 0));
+  --scrim-chip: rgba(10, 10, 15, 0.6);
+  --sun-halo: 0 0 0 28px rgba(245, 197, 24, 0.25), 0 0 0 64px rgba(245, 197, 24, 0.1);
+  --shadow-float: 0 8px 24px rgba(10, 10, 15, 0.3);
+
+  /* Swell home (beach landing) */
+  --sea-abyss: #071419;
+  --sea-deep: #0B2E33;
+  --sea-teal: #0B3A42;
+  --sea-night: #0D3B40;
+  --north-night: #0E1626;
+  --foam: #FFFFFF;
+  --swell-sand: #F1E4C6;
+  --swell-sand-ink: #2A241B;
+  --swell-sand-muted: #6B5A3E;  /* 5.3:1 on --swell-sand */
+  --swell-scroll: #8A6A2E;
+  --board: #FFFDF6;
+  --board-ink: #4A4034;
+  --glow: #7FF5E6;
+  --glow-text: #D4E6E3;
+  --glow-panel: rgba(13, 59, 64, 0.55);
+  --glow-line: rgba(127, 245, 230, 0.25);
+  --glow-line-strong: rgba(127, 245, 230, 0.35);
+  --glow-shadow: 0 0 40px -10px rgba(127, 245, 230, 0.35);
+  --glow-spark: 0 0 12px 3px rgba(127, 245, 230, 0.6);
+  --line-dark: rgba(10, 10, 15, 0.3);
+  --chip-sea: rgba(7, 20, 25, 0.7);
+  --ghost-fill: rgba(10, 10, 15, 0.35);
+  --ghost-line: rgba(255, 255, 255, 0.75);
+  --board-seam: rgba(255, 253, 246, 0.55);
+  --shadow-board: 0 28px 40px -24px rgba(58, 40, 10, 0.5);
+  --scrim-shore: linear-gradient(90deg, rgba(7, 20, 25, 0.8) 0%, rgba(7, 20, 25, 0.4) 55%, rgba(7, 20, 25, 0.1) 100%);
+  --scrim-shore-tall: linear-gradient(180deg, rgba(7, 20, 25, 0.25) 0%, rgba(7, 20, 25, 0.55) 40%, rgba(7, 20, 25, 0.88) 100%);
+  --scrim-north: linear-gradient(90deg, rgba(14, 22, 38, 0.85) 0%, rgba(14, 22, 38, 0.35) 70%);
+  --scrim-south: linear-gradient(270deg, rgba(11, 58, 66, 0.88) 0%, rgba(11, 58, 66, 0.35) 70%);
+  --scrim-note: linear-gradient(0deg, rgba(7, 20, 25, 0.92) 0%, rgba(7, 20, 25, 0.7) 55%, rgba(7, 20, 25, 0.1) 100%);
+  --sea-glow-bg: radial-gradient(120% 80% at 70% 100%, var(--sea-night) 0%, var(--sea-abyss) 60%);
+
+  --fs-swell-hero: clamp(56px, 7.8vw, 112px);
+  --fs-swell-h2: clamp(40px, 5vw, 72px);
+  --fs-swell-word: clamp(64px, 9.2vw, 132px);
+  --fs-swell-giant: clamp(72px, 10.4vw, 150px);
+  --fs-swell-lead: 21px;
+  --fs-swell-card: 23px;
+  --fs-swell-price: 28px;
+  --fs-swell-feat: 34px;
+
+  /* North (altitude route) */
+  --north-card: #1B2740;
+  --north-cell: #24324F;
+  --north-mist: #C9D6E6;     /* body text on --north-night, 11:1 */
+  --north-faint: #94A3BA;    /* labels on --north-night, 6.9:1 */
+  --north-ridge-far: #33456A;
+  --north-ridge-near: #1F2D4B;
+  --north-dusk: #3F5276;
+  --north-ridge-snow: #8EA1C0;
+  --north-ridge-mid: #5C7097;
+  --snow: #EEF3F8;
+  --pine: #1E3A2B;
+  --trail-line: #B9AE95;
+  --flag-blue: #2F6DB5;
+  --flag-white: #FFFFFF;
+  --flag-red: #C8312B;
+  --flag-green: #2E7D4F;
+  --flag-yellow: #F5C518;
+  --scrim-north-hero: linear-gradient(180deg, rgba(14, 22, 38, 0.7) 0%, rgba(14, 22, 38, 0.5) 45%, rgba(14, 22, 38, 0.1) 75%);
+  --scrim-north-focus: radial-gradient(closest-side, rgba(14, 22, 38, 0.7), rgba(14, 22, 38, 0));
+  --scrim-north-summit: linear-gradient(180deg, rgba(14, 22, 38, 0.35) 0%, rgba(14, 22, 38, 0) 40%, rgba(14, 22, 38, 0.6) 80%, #0E1626 100%);
+  --scrim-north-card: linear-gradient(180deg, rgba(14, 22, 38, 0) 0%, rgba(14, 22, 38, 0.92) 100%);
+  --scrim-pass: linear-gradient(180deg, rgba(10, 10, 15, 0.72), rgba(10, 10, 15, 0.9));
+  --north-treeline: linear-gradient(180deg, #FAF6EC 0%, #FAF6EC 22%, #C9D6E6 46%, #3F5276 70%, #0E1626 100%);
+
+  /* South (coastline route) */
+  --shell: #F4EBDD;
+  --postcard: #FFFDF7;
+  --south-teal: #0F5257;     /* also text on --shell, 7.6:1 */
+  --south-field: #134048;
+  --south-ink-muted: #4A4A52; /* on --shell / --postcard, 7.5:1+ */
+  --south-mist: #BFD8D5;     /* on --sea-deep, 9:1 */
+  --south-faint: #8FB3AF;    /* labels on --sea-deep, 6:1 */
+  --south-hill: #DDD0B4;
+  --ticket-seam: #D9CFB8;
+  --ticket-rule: #E6DDC8;
+  --trail-dash: #CFC4AE;
+  --stamp-beach: #1F7A78;
+  --stamp-heritage: #A9471F;
+  --stamp-hills: #2E5E3A;
+  --stamp-water: #1F5F8B;
+  --stamp-end: #B3261E;
+  --film: #0A0A0F;
+  --film-hole: rgba(255, 253, 247, 0.75);
+  --stamp-ink: rgba(10, 10, 15, 0.75);
+  --stamp-ring: rgba(10, 10, 15, 0.55);
+  --stamp-fill: rgba(255, 253, 247, 0.8);
+  --scrim-south-hero: linear-gradient(180deg, rgba(11, 46, 51, 0.7) 0%, rgba(11, 46, 51, 0.45) 50%, rgba(11, 46, 51, 0.25) 80%);
+  --scrim-south-focus: radial-gradient(closest-side, rgba(11, 46, 51, 0.7), rgba(11, 46, 51, 0));
+  --scrim-south-end: linear-gradient(180deg, rgba(11, 46, 51, 0.25) 0%, rgba(11, 46, 51, 0) 40%, rgba(11, 46, 51, 0.6) 80%, #0B2E33 100%);
+  --chip-south: rgba(11, 46, 51, 0.65);
+  --shadow-post: 0 22px 40px -22px rgba(10, 10, 15, 0.45);
+  --shadow-lift: 0 40px 60px -24px rgba(10, 10, 15, 0.6);
+  --shadow-card: 0 18px 40px -18px rgba(10, 10, 15, 0.45);
+
+  /* Field notes: the logbook on the night sea */
+  --notes-sea: #0B2328;
+  --notes-card: #0E2E34;
+  --notes-text: #EAF6F4;
+  --notes-mist: #C9DEDB;     /* body text on --notes-card, 10:1 */
+  --notes-faint: #9FC2BE;    /* labels on --notes-card, 7.5:1 */
+  --notes-line: rgba(127, 245, 230, 0.22);
+  --notes-chip-line: rgba(127, 245, 230, 0.55);
+  --notes-stamp-fill: rgba(7, 20, 25, 0.55);
+  --notes-ink: #24242C;      /* article prose on --postcard */
+  --scrim-note-hero: linear-gradient(0deg, rgba(14, 22, 38, 0.92) 0%, rgba(14, 22, 38, 0.55) 45%, rgba(14, 22, 38, 0.15) 100%);
+  --scrim-note-hero-sea: linear-gradient(0deg, rgba(7, 20, 25, 0.92) 0%, rgba(7, 20, 25, 0.55) 45%, rgba(7, 20, 25, 0.15) 100%);
+  --fs-notes-hero: clamp(56px, 7.2vw, 104px);
+  --fs-note-title: clamp(42px, 5vw, 72px);
+  --fs-note-prose: 19px;
+  --fs-note-h2: clamp(26px, 2.4vw, 32px);
+
+  --crest-h: 118px;          /* how far each wave reaches up over the page below */
+  --panel-min: 880px;        /* desktop panels never get shorter than this */
+  --swell-edge: 96px;        /* left content edge on desktop */
+  --radius-board: 150px 150px 28px 28px;
+  --ease-swell: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (max-width: 900px) {
+  :root { --rail-gutter: 24px; }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
