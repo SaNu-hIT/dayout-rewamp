@@ -1,0 +1,162 @@
+/* Swell home: shared type, buttons, and the stack of wave panels. */
+
+.page {
+  font-family: 'Outfit', system-ui, sans-serif;
+  color: var(--foam);
+  background: var(--sea-abyss);
+  overflow-x: clip;
+  line-height: 1.5;
+}
+
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.chip {
+  composes: mono;
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--scrim-chip);
+  font-size: var(--fs-label);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 26px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--dark);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  transition: background var(--transition);
+}
+.pill:hover { background: var(--paper); }
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ghost-line);
+  background: var(--ghost-fill);
+  color: var(--foam);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  transition: border-color var(--transition), color var(--transition);
+}
+.ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+.page a:focus-visible,
+.page [tabindex]:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.h2 {
+  font-size: var(--fs-swell-h2);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+/* ---- The stack ----
+   Every panel is sticky; the next one rolls in over it with a foam crest,
+   and the one underneath sinks back (scaled, darkened).
+   A panel taller than the screen scrolls until its bottom is in view, then sticks. */
+.stack {
+  --panel-h: max(100svh, var(--panel-min));
+  position: relative;
+  timeline-scope: --w2, --w3, --w4, --w5;
+}
+
+.panel {
+  position: sticky;
+  top: min(0px, calc(100svh - var(--panel-h)));
+  height: var(--panel-h);
+  scroll-margin-top: 0;
+}
+.p1 { z-index: 1; }
+.p2 { z-index: 2; view-timeline-name: --w2; }
+.p3 { z-index: 3; view-timeline-name: --w3; }
+.p4 { z-index: 4; view-timeline-name: --w4; }
+.p5 { z-index: 5; view-timeline-name: --w5; }
+
+.body {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* From wave 2 on, the page reaches up into the crest. A wave-shaped mask, rolling in step
+   with the foam line, shows this page's own photo or colour; the page below shows around it. */
+.crested {
+  top: calc(-1 * var(--crest-h));
+  mask-image: var(--crest-mask);
+  mask-repeat: repeat-x, no-repeat;
+  mask-size: 1440px 120px, 100% calc(100% - var(--crest-h));
+  mask-position: 50% 0, 0 100%;
+  animation: mask-roll 14s linear infinite;
+}
+@keyframes mask-roll {
+  to { mask-position: calc(50% - 1440px) 0, 0 100%; }
+}
+
+.crest {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--crest-h));
+  height: 120px;
+  pointer-events: none;
+  z-index: 1;
+}
+.crest svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.roll { animation: roll 14s linear infinite; }
+@keyframes roll { to { transform: translateX(-1440px); } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .p1 .body { animation: sink linear both; animation-timeline: --w2; animation-range: entry 0% entry 100%; }
+    .p2 .body, .p3 .body, .p4 .body {
+      animation: mask-roll 14s linear infinite, sink linear both;
+      animation-range: normal, entry 0% entry 100%;
+    }
+    .p2 .body { animation-timeline: auto, --w3; }
+    .p3 .body { animation-timeline: auto, --w4; }
+    .p4 .body { animation-timeline: auto, --w5; }
+  }
+}
+@keyframes sink {
+  to { transform: scale(0.9) translateY(-40px); filter: brightness(0.4); border-radius: 40px; }
+}
+
+/* Below 900px the waves stack as normal sections: no stickiness, no sinking. */
+@media (max-width: 900px) {
+  .panel { position: relative; top: auto; height: auto; min-height: 760px; }
+  .body { position: relative; inset: auto; min-height: 760px; }
+  .p1 .body { animation: none; }
+  .p2 .body, .p3 .body, .p4 .body { animation: mask-roll 14s linear infinite; }
+  .crested { top: auto; }
+  .p2, .p3, .p4, .p5 { margin-top: calc(-1 * var(--crest-h)); }
+  .crest { top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll, .body, .crested { animation: none !important; }
+}

@@ -1,0 +1,66 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.logoImg { border-radius: 8px; object-fit: contain; }
+.accent { color: var(--yellow); }
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: var(--fs-small);
+}
+.links a:hover { color: var(--yellow); }
+
+.chat {
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+/* Wave counter: jump between waves. */
+.counter {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.wave {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 6px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--chip-sea);
+  font-size: var(--fs-micro);
+  color: var(--foam);
+}
+.waveGlyph { width: 22px; height: 10px; color: var(--yellow); }
+
+@media (max-width: 900px) {
+  .header { padding: 16px var(--gutter); }
+  .links, .counter { display: none; }
+}

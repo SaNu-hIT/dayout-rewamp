@@ -11,11 +11,11 @@ const DESTS = [
 ];
 
 const EXPS = [
-  { name: 'Beach Getaways', id: 'experiences' },
-  { name: 'Nature Treks', id: 'experiences' },
-  { name: 'Night Experiences', id: 'experiences' },
-  { name: 'Music Festivals', id: 'experiences' },
-  { name: 'Eco Camping', id: 'experiences' },
+  { name: 'Beach Getaways', id: 'packages' },
+  { name: 'Nature Treks', id: 'packages' },
+  { name: 'Night Experiences', id: 'packages' },
+  { name: 'Music Festivals', id: 'packages' },
+  { name: 'Eco Camping', id: 'packages' },
 ];
 
 const COMP = [

@@ -1,0 +1,47 @@
+.palm {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+.soft { opacity: 0.16; }
+.normal { opacity: 0.2; }
+
+.svg,
+.flipped {
+  position: absolute;
+  top: -40px;
+  width: 1000px;
+  height: 800px;
+  filter: blur(4px);
+}
+.svg { right: -60px; }
+.flipped { left: -60px; transform: scaleX(-1); }
+
+.frond {
+  fill: none;
+  stroke: var(--shadow-leaf);
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+.sway {
+  animation: sway 7s ease-in-out infinite alternate;
+  transform-origin: 0 0;
+}
+@keyframes sway {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg); }
+}
+
+@media (max-width: 900px) {
+  .svg,
+  .flipped { width: 640px; height: 512px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sway { animation: none; }
+}

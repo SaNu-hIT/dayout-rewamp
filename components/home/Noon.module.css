@@ -1,0 +1,119 @@
+.section {
+  background: var(--paper);
+  color: var(--dark);
+  overflow: hidden;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.intro {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lead {
+  margin-top: 8px;
+  max-width: 440px;
+}
+
+/* dt comes first for screen readers; shown below the number. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+  margin-top: 40px;
+  max-width: 460px;
+}
+.stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.statValue {
+  font-size: var(--fs-h2-sm);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.suffix {
+  font-size: 0.5em;
+  color: var(--sun-ink);
+}
+
+.statLabel {
+  margin-top: 4px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--muted-day);
+}
+
+.timeline {
+  flex: 1 1 480px;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 72px 24px 1fr;
+  gap: 16px;
+  padding-bottom: 36px;
+}
+
+.time {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  padding-top: 4px;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.track::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: -36px;
+  width: 1px;
+  background: var(--line-sand);
+}
+.step:last-child .track::before { display: none; }
+
+.dot {
+  position: relative;
+  margin-top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  border: 2px solid var(--dark);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stepTitle {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+}
+
+.desc {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--muted-day);
+}

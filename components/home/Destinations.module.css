@@ -1,0 +1,125 @@
+.section {
+  position: relative;
+  background: var(--sand);
+  color: var(--dark);
+  padding: var(--space-section) 0 var(--space-section) var(--rail-gutter);
+  overflow: hidden;
+}
+
+.head {
+  position: relative;
+  z-index: 1;
+  max-width: 1376px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-right: var(--gutter);
+  margin-bottom: 56px;
+}
+
+.mark {
+  background: var(--yellow);
+  color: inherit;
+  padding: 0 0.15em;
+}
+
+.aside { max-width: 360px; }
+
+.rail {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 0 var(--gutter) 72px 0;
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar { display: none; }
+
+.item {
+  flex: 0 0 min(340px, 80vw);
+  margin-top: var(--offset, 0);
+  scroll-snap-align: start;
+}
+
+.card {
+  position: relative;
+  display: block;
+  height: 480px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--ink-3);
+}
+.card:focus-visible {
+  outline: 3px solid var(--dark);
+  outline-offset: 3px;
+}
+
+.photo {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.card:hover .photo { transform: scale(1.04); }
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-card);
+}
+
+.best {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--yellow);
+  color: var(--dark);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.body {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.region {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  color: var(--on-photo);
+}
+
+.name {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+.blurb {
+  font-size: var(--fs-small);
+  color: var(--on-photo);
+}
+
+@media (max-width: 900px) {
+  .item { margin-top: 0; }
+  .card { height: 420px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo { transition: none; }
+  .card:hover .photo { transform: none; }
+}

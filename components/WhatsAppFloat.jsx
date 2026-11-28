@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import styles from './WhatsAppFloat.module.css';
 
-const WA_LINK = 'https://wa.me/918848965352?text=Hi%20DayOut%2C%20I%27d%20like%20to%20plan%20a%20Goa%20trip!';
+const WA_LINK = 'https://wa.me/918848965352?text=Hi%20DayOut%2C%20I%27d%20like%20to%20plan%20a%20trip.';
 
 export default function WhatsAppFloat() {
   const [visible, setVisible] = useState(false);

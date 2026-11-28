@@ -1,0 +1,59 @@
+.section {
+  background: var(--dark);
+  color: var(--paper);
+  padding-top: 40px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.board {
+  background: var(--ink-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.table th {
+  text-align: left;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  color: var(--faint-night);
+  padding: 0 12px;
+}
+
+.table td { padding: 0 6px; }
+
+/* Split-flap tile: a thin dark seam across the middle. */
+.flap {
+  display: inline-block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-body);
+  padding: 12px 14px;
+  border-radius: 6px;
+  background-color: var(--ink-3);
+  background-image: linear-gradient(transparent 49%, var(--dark) 49%, var(--dark) 51%, transparent 51%);
+}
+
+.open { color: var(--paper); }
+.filling { color: var(--yellow); }
+.last { color: var(--ember); }

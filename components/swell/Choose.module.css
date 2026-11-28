@@ -1,0 +1,118 @@
+.split {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.half {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--foam);
+  transition: flex-grow 0.8s var(--ease-swell);
+}
+.half:hover,
+.half:focus-visible { flex-grow: 1.5; }
+
+/* North starts under the crest, so it gets the crest height back to stay level with South. */
+.north {
+  flex-basis: var(--crest-h);
+  padding: var(--crest-h) 120px 0;
+  align-items: flex-start;
+  text-align: left;
+  background: var(--north-night);
+}
+.south {
+  /* The next wave's crest covers the last --crest-h of every panel, so centre above it. */
+  padding: 0 120px var(--crest-h);
+  align-items: flex-end;
+  text-align: right;
+  background: var(--sea-teal);
+}
+
+.photo {
+  object-fit: cover;
+  transition: transform 1.4s var(--ease-swell);
+}
+.north .photo { object-position: center 72%; }
+.south .photo { object-position: center 55%; }
+.half:hover .photo { transform: scale(1.05); }
+
+.scrim { position: absolute; inset: 0; }
+.north .scrim { background: var(--scrim-north); }
+.south .scrim { background: var(--scrim-south); }
+
+.text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: 14px;
+}
+
+.word {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-swell-word);
+  line-height: 0.85;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.sun {
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 0.02em;
+  overflow: visible;
+  color: var(--yellow);
+}
+
+.mood { font-size: var(--fs-lead); }
+.places { font-size: var(--fs-label); color: var(--on-photo); }
+.cta { margin-top: 4px; }
+
+/* The waterline sits on the seam between the halves (offset by half the crest). */
+.waterline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + var(--crest-h) / 2);
+  transform: translateY(-50%);
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+  stroke: var(--foam);
+}
+.lap { animation: lap 3.8s ease-in-out infinite alternate; }
+@keyframes lap {
+  from { transform: translateY(-8px); }
+  to { transform: translateY(10px); }
+}
+
+.tag {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--crest-h) / 2);
+  transform: translate(-50%, -50%);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--dark);
+  font-size: var(--fs-label);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .split { position: relative; inset: auto; height: 1100px; }
+  .north, .south { padding-left: var(--gutter); padding-right: var(--gutter); }
+  .south { padding-top: 48px; }  /* clear the waterline tag */
+  .places, .tagWave { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lap { animation: none; }
+  .half, .photo { transition: none; }
+}

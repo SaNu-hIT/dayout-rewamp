@@ -1,0 +1,96 @@
+.hero {
+  position: relative;
+  min-height: max(640px, 100svh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--paper);
+  padding: 140px var(--gutter);
+  overflow: hidden;
+  background: var(--sun-deep);
+}
+
+.photo { object-fit: cover; }
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-hero);
+}
+.night .shade { background: var(--scrim-hero-night); }
+
+.content {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Darkens the photo behind the copy so text holds AA contrast over bright sky. */
+.content::before {
+  content: '';
+  position: absolute;
+  inset: -80px -160px;
+  z-index: -1;
+  background: var(--scrim-focus);
+}
+
+.label {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--scrim-chip);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-label);
+  color: var(--on-photo);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-display);
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.sun {
+  width: 0.86em;
+  height: 0.86em;
+  margin: 0 0.01em;
+  overflow: visible;
+  color: var(--yellow);
+}
+
+.sub {
+  max-width: 560px;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--paper);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.foot {
+  position: absolute;
+  left: var(--rail-gutter);
+  right: var(--gutter);
+  bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: var(--fs-micro);
+  color: var(--on-photo);
+}

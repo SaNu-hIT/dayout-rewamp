@@ -1,0 +1,88 @@
+.sunset {
+  position: relative;
+  height: 640px;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.sky,
+.sea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sky {
+  top: 0;
+  bottom: 50%;
+  z-index: 1;
+  align-items: flex-start;
+  padding: 72px var(--gutter) 0 var(--rail-gutter);
+  color: var(--dark);
+}
+
+/* The sea sits above the sun, so the sun sinks behind the horizon. */
+.sea {
+  top: 50%;
+  bottom: 0;
+  z-index: 1;
+  align-items: flex-end;
+  padding: 0 var(--gutter) 72px var(--rail-gutter);
+  background: var(--dark);
+  color: var(--paper);
+}
+
+.eyebrow,
+.hint {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-label);
+}
+.eyebrow { color: var(--sun-ink); }
+.hint { color: var(--muted-night); }
+
+.line {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.out { color: var(--yellow); }
+
+.sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(380px, 70vw);
+  aspect-ratio: 1;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  box-shadow: var(--sun-halo);
+  transform: translate(-50%, -50%);
+}
+
+/* Scroll-driven sink. Without support the sun rests half-set, as designed. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sun {
+      animation: sink linear both;
+      animation-timeline: view();
+      animation-range: entry 30% exit 30%;
+    }
+  }
+}
+@keyframes sink {
+  from { transform: translate(-50%, -105%); }
+  to { transform: translate(-50%, -20%); }
+}
+
+@media (max-width: 900px) {
+  .sunset { height: 520px; }
+  .sky { padding-top: 48px; }
+  .sea { padding-bottom: 48px; }
+}

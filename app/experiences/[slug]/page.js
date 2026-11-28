@@ -53,7 +53,7 @@ export default async function ExperienceDetail({ params }) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${BASE_URL}/#experiences` },
+      { '@type': 'ListItem', position: 2, name: 'Packages', item: `${BASE_URL}/#packages` },
       { '@type': 'ListItem', position: 3, name: exp.title, item: `${BASE_URL}/experiences/${exp.slug}` },
     ],
   };
@@ -69,7 +69,7 @@ export default async function ExperienceDetail({ params }) {
       <nav className={styles.breadcrumb} aria-label="Breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true"> / </span>
-        <Link href="/#experiences">Experiences</Link>
+        <Link href="/#packages">Packages</Link>
         <span aria-hidden="true"> / </span>
         <span aria-current="page">{exp.title}</span>
       </nav>

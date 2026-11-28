@@ -1,0 +1,70 @@
+/* Difference blend keeps the white rail legible over sand, yellow and night. */
+.rail {
+  position: fixed;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  mix-blend-mode: difference;
+  color: var(--paper);
+}
+
+.rail ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+  min-height: 32px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-micro);
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+.stop:hover,
+.active { opacity: 1; }
+.stop:focus-visible {
+  opacity: 1;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  transition: width var(--transition), height var(--transition);
+}
+.active .dot {
+  width: 8px;
+  height: 8px;
+}
+/* "now" sits under the time so the rail stays inside --rail-gutter. */
+.now {
+  flex-basis: 100%;
+  padding-left: 20px;
+  margin-top: -6px;
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+}
+.dotNow {
+  width: 10px;
+  height: 10px;
+}
+
+@media (max-width: 900px) {
+  .rail { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stop,
+  .dot { transition: none; }
+}

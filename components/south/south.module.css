@@ -1,0 +1,408 @@
+/* South India — the coastline route. */
+
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- km 0: hero ---- */
+.hero {
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  color: var(--foam);
+  background: var(--sea-deep);
+}
+.heroPhoto { object-fit: cover; object-position: center 55%; }
+.heroScrim { position: absolute; inset: 0; background: var(--scrim-south-hero); }
+.focus {
+  position: absolute;
+  left: 50%;
+  top: 90px;
+  width: min(1100px, 100%);
+  height: 640px;
+  transform: translateX(-50%);
+  background: var(--scrim-south-focus);
+  z-index: 1;
+}
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+  padding: 150px var(--gutter) 0;
+}
+.chip {
+  composes: mono;
+  font-size: var(--fs-label);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--chip-south);
+}
+.title {
+  font-size: var(--fs-display);
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  display: flex;
+  align-items: center;
+}
+.titleSun { width: 0.86em; height: 0.86em; margin: 0 0.01em; overflow: visible; color: var(--yellow); }
+.heroLead { max-width: 620px; font-size: var(--fs-lead); line-height: 1.5; }
+.heroFoot {
+  composes: mono;
+  position: absolute;
+  left: var(--rail-gutter);
+  right: var(--gutter);
+  bottom: 120px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+/* Tide: two layers on a 2x-wide strip, slid left so the loop is seamless. */
+.tide {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 200%;
+  height: 110px;
+  z-index: 1;
+  animation: tide 16s linear infinite;
+}
+.tideLow { height: 90px; z-index: 0; }
+.tideBack { opacity: 0.5; }
+@keyframes tide { to { transform: translateX(-50%); } }
+.fillSea { fill: var(--sea-deep); }
+.fillShell { fill: var(--shell); }
+
+/* ---- Goa, after the sun: film strip ---- */
+.hours { overflow: hidden; padding: 96px 0 150px; }
+.hoursHead { padding: 0 var(--gutter) 0 var(--rail-gutter); max-width: 1376px; }
+.film { transform: rotate(-2deg); margin: 0 -40px; }
+.filmStrip {
+  position: relative;
+  background: var(--film);
+  padding: 30px 0;
+  overflow-x: auto;
+}
+.filmStrip::before,
+.filmStrip::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(90deg, var(--film-hole) 0 14px, transparent 14px 30px);
+}
+.filmStrip::before { top: 10px; }
+.filmStrip::after { bottom: 10px; }
+.frames { display: flex; gap: 16px; width: max-content; padding: 0 136px; }
+.frame {
+  position: relative;
+  width: 360px;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.frame img { object-fit: cover; }
+.frameCap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14px 16px;
+  background: var(--scrim-card);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+.frameWhat { font-size: var(--fs-body); font-weight: 500; }
+.frameTime { composes: mono; font-size: 12px; color: var(--yellow); }
+.credit { composes: mono; margin-top: 28px; padding: 0 var(--gutter) 0 var(--rail-gutter); font-size: var(--fs-micro); color: var(--south-faint); }
+
+/* ---- The route: sticky map, postcards ---- */
+.route { view-timeline-name: --route; }
+.routeGrid {
+  display: grid;
+  grid-template-columns: 500px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+  max-width: 1320px;
+}
+.mapWrap { position: sticky; top: 96px; }
+.map {
+  background: var(--south-teal);
+  border-radius: 24px;
+  padding: 18px;
+  color: var(--foam);
+}
+.map svg { display: block; width: 100%; height: auto; }
+.mapText { composes: mono; fill: var(--south-mist); font-size: 12px; }
+.mapTextLight { composes: mono; fill: var(--foam); font-size: 11px; }
+.latLine { stroke: var(--foam); stroke-opacity: 0.18; stroke-dasharray: 3 7; }
+.shore { fill: none; stroke: var(--dark); stroke-opacity: 0.25; stroke-width: 1.5; stroke-linejoin: round; }
+.routeGhost { fill: none; stroke: var(--dark); stroke-opacity: 0.3; stroke-width: 2.5; stroke-dasharray: 6 8; stroke-linecap: round; }
+.routeLine { fill: none; stroke: var(--dark); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.detour { fill: none; stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; }
+.detourSea { stroke: var(--dark); }
+.detourAir { stroke: var(--foam); }
+.inset { fill: var(--sea-deep); stroke: var(--foam); stroke-opacity: 0.4; stroke-dasharray: 3 5; }
+.island { fill: var(--shell); }
+.pin { stroke: var(--dark); stroke-width: 2; fill: var(--yellow); }
+.pinDetour { fill: var(--postcard); }
+.pinLabel {
+  composes: mono;
+  fill: var(--dark);
+  font-size: 12px;
+  font-weight: 500;
+  paint-order: stroke;
+  stroke: var(--shell);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.compass { fill: var(--foam); fill-opacity: 0.35; }
+.compassTip { fill: var(--yellow); }
+.compassRing { fill: none; stroke: var(--foam); stroke-opacity: 0.5; }
+.scaleBar { stroke: var(--foam); stroke-width: 2; }
+.mapCap {
+  composes: mono;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 6px 2px;
+  font-size: var(--fs-micro);
+  color: var(--south-mist);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .routeLine {
+      stroke-dasharray: 1;
+      animation: draw linear both;
+      animation-timeline: --route;
+      animation-range: contain 0% contain 90%;
+    }
+    .depthFar {
+      animation: far linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 900px;
+    }
+  }
+}
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes far { to { transform: translateY(220px) scale(1.1); } }
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 44px 28px;
+  padding-bottom: 90px;
+}
+.post {
+  position: relative;
+  background: var(--postcard);
+  padding: 12px 12px 18px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-post);
+  transform: rotate(var(--rot)) translateY(var(--shift));
+  transition: transform 0.5s var(--ease-swell), box-shadow 0.5s;
+  scroll-margin-top: 96px;
+}
+.post:hover,
+.post:focus-within { transform: rotate(0deg) translateY(calc(var(--shift) - 8px)); box-shadow: var(--shadow-lift); }
+.postPhoto { position: relative; height: 230px; overflow: hidden; border-radius: 2px; background: var(--south-teal); }
+.postPhoto img { object-fit: cover; transition: transform 0.6s var(--ease-swell); }
+.post:hover .postPhoto img { transform: scale(1.06); }
+.km {
+  composes: mono;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: var(--fs-micro);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--dark);
+}
+.postmark {
+  composes: mono;
+  position: absolute;
+  top: 196px;
+  right: 92px;
+  width: 74px;
+  height: 74px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--stamp-ring);
+  color: var(--stamp-ink);
+  background: var(--stamp-fill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 9px;
+  line-height: 1.5;
+  transform: rotate(-14deg);
+}
+.postBody { display: flex; justify-content: space-between; gap: 14px; padding: 16px 6px 0; }
+.postText { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.postKicker { composes: mono; font-size: var(--fs-micro); color: var(--south-teal); }
+.postName { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.01em; }
+.postBlurb { font-size: var(--fs-small); line-height: 1.5; color: var(--south-ink-muted); }
+.postSeason { composes: mono; margin-top: 4px; font-size: var(--fs-micro); color: var(--south-ink-muted); }
+.stamp {
+  composes: mono;
+  flex: 0 0 auto;
+  width: 58px;
+  height: 70px;
+  margin: 4px 4px 0 0;
+  background: var(--stamp);
+  color: var(--postcard);
+  outline: 3px dotted var(--stamp);
+  outline-offset: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: var(--fs-label);
+  font-weight: 500;
+}
+.stampSmall { font-size: 8px; opacity: 0.85; }
+
+/* ---- Kochi ---- */
+.split { display: flex; flex-wrap: wrap; gap: 64px; }
+.splitCopy { flex: 1 1 420px; display: flex; flex-direction: column; gap: 14px; }
+.print {
+  margin-top: 40px;
+  max-width: 460px;
+  background: var(--paper);
+  padding: 10px 10px 14px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-2deg);
+}
+.printPhoto { position: relative; height: 260px; }
+.printPhoto img { object-fit: cover; }
+.printCap { composes: mono; padding-top: 10px; font-size: var(--fs-micro); color: var(--south-ink-muted); }
+
+/* ---- Tickets ---- */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+.filter {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--foam);
+  border: 1.5px solid var(--ghost-line);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.filter:hover { border-color: var(--yellow); }
+.filter[aria-pressed='true'] { background: var(--yellow); color: var(--dark); border-color: var(--yellow); }
+.tickets { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr)); gap: 24px; }
+.ticket {
+  --stub: 180px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--stub);
+  background: var(--postcard);
+  color: var(--dark);
+  border-radius: 16px;
+  min-height: 260px;
+  border-top: 8px solid var(--band);
+}
+.ticketMain { padding: 22px 26px; display: flex; flex-direction: column; gap: 14px; }
+.ticketTop { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.ticketNo { composes: mono; font-size: var(--fs-micro); color: var(--south-ink-muted); }
+.moodBadge {
+  composes: mono;
+  font-size: var(--fs-micro);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--band);
+  color: var(--postcard);
+}
+.fromTo { composes: mono; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 500; letter-spacing: 0.02em; }
+.arrow { color: var(--south-teal); }
+.ticketName { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.ticketDesc { font-size: var(--fs-small); line-height: 1.55; color: var(--south-ink-muted); }
+.specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 2px dashed var(--ticket-rule);
+}
+.specLabel { composes: mono; font-size: var(--fs-micro); color: var(--south-ink-muted); }
+.specValue { margin-top: 4px; font-size: var(--fs-small); font-weight: 500; }
+.stub {
+  border-left: 2px dashed var(--ticket-seam);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.price { margin-top: 6px; font-size: var(--fs-swell-price); font-weight: 600; color: var(--south-teal); letter-spacing: -0.02em; }
+.enquire { min-height: 44px; padding: 0 18px; }
+.punch {
+  position: absolute;
+  right: calc(var(--stub) - 14px);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--south-teal);
+}
+.punchTop { top: -21px; }
+.punchBottom { bottom: -13px; }
+
+/* ---- Land's end ---- */
+.endCoords {
+  position: absolute;
+  left: var(--rail-gutter);
+  right: var(--gutter);
+  top: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.endChip { composes: mono; font-size: 12px; padding: 6px 12px; border-radius: var(--radius-pill); background: var(--chip-south); }
+
+@media (max-width: 900px) {
+  .hero { min-height: 760px; }
+  .heroCopy { padding-top: 120px; }
+  .film { transform: none; margin: 0; }
+  .frames { padding: 0 var(--gutter); }
+  .frame { width: 280px; height: 190px; }
+  .routeGrid { grid-template-columns: 1fr; }
+  .mapWrap { position: relative; top: 0; }
+  .posts { grid-template-columns: 1fr; padding-bottom: 0; }
+  .post { --rot: 0deg !important; --shift: 0px !important; }
+  .ticket { grid-template-columns: 1fr; }
+  .stub {
+    border-left: 0;
+    border-top: 2px dashed var(--ticket-seam);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .punch { display: none; }
+  .fromTo { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tide { animation: none; }
+  .post, .postPhoto img { transition: none; }
+}
