@@ -37,45 +37,45 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className={styles.successMessage}>
-        <div className={styles.successIcon}>✓</div>
-        <h3>Request Received!</h3>
+      <div className={styles.successMessage} role="status">
+        <div className={styles.successIcon} aria-hidden="true">✓</div>
+        <h3 className={styles.formTitle}>Request received</h3>
         <p>{message}</p>
-        <button onClick={() => setStatus('idle')} className="btn-outline" style={{ marginTop: '24px' }}>
-          Plan Another Trip
+        <button type="button" onClick={() => setStatus('idle')} className={styles.again}>
+          Plan another trip
         </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <h3 style={{ fontSize: '1.5rem', marginBottom: '24px', fontWeight: 800 }}>Trip Request Form</h3>
-      
+    <form onSubmit={handleSubmit} className={styles.form} aria-labelledby="trip-form-title">
+      <h2 id="trip-form-title" className={styles.formTitle}>Trip request</h2>
+
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="name">Full Name *</label>
-          <input type="text" id="name" name="name" required placeholder="John Doe" />
+          <label htmlFor="name">Full name *</label>
+          <input type="text" id="name" name="name" autoComplete="name" required placeholder="John Doe" />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="email">Email Address *</label>
-          <input type="email" id="email" name="email" required placeholder="john@example.com" />
+          <label htmlFor="email">Email address *</label>
+          <input type="email" id="email" name="email" autoComplete="email" required placeholder="john@example.com" />
         </div>
       </div>
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="phone">Phone Number *</label>
-          <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210" />
+          <label htmlFor="phone">Phone number *</label>
+          <input type="tel" id="phone" name="phone" autoComplete="tel" required placeholder="+91 98765 43210" />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="destination">Destination Interest</label>
+          <label htmlFor="destination">Where to?</label>
           <select id="destination" name="destination">
             <option value="">Select a destination...</option>
-            <option value="north_goa">North Goa (Baga, Calangute)</option>
-            <option value="south_goa">South Goa (Palolem, Colva)</option>
-            <option value="central_goa">Central Goa (Panaji, Old Goa)</option>
-            <option value="dudhsagar">Dudhsagar / Wildlife</option>
+            <option value="north_india">North India (Ladakh, Kashmir, Rajasthan)</option>
+            <option value="kerala">Kerala (Munnar, Alleppey)</option>
+            <option value="goa">Goa</option>
+            <option value="south_india">Rest of South India and islands</option>
             <option value="other">Other / Not sure yet</option>
           </select>
         </div>
@@ -83,27 +83,25 @@ export default function ContactForm() {
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="checkIn">Check-In Date</label>
+          <label htmlFor="checkIn">Start date</label>
           <input type="date" id="checkIn" name="checkIn" className={styles.dateInput} />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="checkOut">Check-Out Date</label>
+          <label htmlFor="checkOut">End date</label>
           <input type="date" id="checkOut" name="checkOut" className={styles.dateInput} />
         </div>
       </div>
 
-      <div className={styles.formRow}>
-        <div className={styles.formGroup}>
-          <label htmlFor="package">Select Package</label>
-          <select id="package" name="package">
-            <option value="">Choose a package...</option>
-            {EXPERIENCES.map((pkg) => (
-              <option key={pkg.slug} value={pkg.slug}>
-                {pkg.title} — {pkg.price}/{pkg.unit} ({pkg.duration})
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="package">Package</label>
+        <select id="package" name="package">
+          <option value="">Choose a package...</option>
+          {EXPERIENCES.map((pkg) => (
+            <option key={pkg.slug} value={pkg.slug}>
+              {pkg.title} — {pkg.price}/{pkg.unit} ({pkg.duration})
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className={styles.formGroup}>
@@ -117,10 +115,10 @@ export default function ContactForm() {
       </div>
 
       <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>
-        {status === 'submitting' ? 'Sending...' : 'Submit Request'}
+        {status === 'submitting' ? 'Sending…' : 'Send trip request'}
       </button>
 
-      {status === 'error' && <p className={styles.errorMessage}>{message}</p>}
+      <p className={styles.errorMessage} role="alert">{status === 'error' ? message : ''}</p>
     </form>
   );
 }

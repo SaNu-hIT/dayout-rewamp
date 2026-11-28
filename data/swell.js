@@ -11,12 +11,16 @@ export const CONTACT = {
   facebook: 'https://www.facebook.com/p/Dayout-Holidays-100087241266220/',
 };
 
-// Planned routes. North, South and Field notes pages are the next build step.
 export const ROUTES = {
   north: '/north',
   south: '/south',
+  packages: '/#swell',
   notes: '/field-notes',
   about: '/about',
+  contact: '/contact',
+  privacy: '/privacy',
+  terms: '/terms',
+  experience: (slug) => `/experiences/${slug}`,
 };
 
 export const WAVES = [
@@ -55,8 +59,8 @@ export const HALVES = [
 ];
 
 export const BOARDS = [
-  { region: 'South', name: 'Goa Couples', season: 'Oct–Mar', dur: '4 Days, 3 Nights', price: '₹7,000', img: '/images/hero-bg.jpg', alt: 'Sunset over a beach lined with water villas' },
-  { region: 'South', name: "Goa Bachelor's", season: 'Oct–Mar', dur: '3 Days, 2 Nights', price: '₹3,750', img: '/images/concert.jpg', alt: 'Fireworks over a crowd at a Goa beach party' },
+  { region: 'South', name: 'Goa Couples', slug: 'couples-package', season: 'Oct–Mar', dur: '4 Days, 3 Nights', price: '₹7,000', img: '/images/hero-bg.jpg', alt: 'Sunset over a beach lined with water villas' },
+  { region: 'South', name: "Goa Bachelor's", slug: 'bachelors-package', season: 'Oct–Mar', dur: '3 Days, 2 Nights', price: '₹3,750', img: '/images/concert.jpg', alt: 'Fireworks over a crowd at a Goa beach party' },
   { region: 'South', name: 'Alleppey Houseboat', season: 'Oct–Mar', dur: '[N] Days, [N] Nights', price: '₹[price]', sample: true, img: '/images/swell/alleppey.jpg', alt: 'Houseboat on palm-lined backwaters' },
   { region: 'North', name: 'Golden Triangle', season: 'Oct–Mar', dur: '[N] Days, [N] Nights', price: '₹[price]', sample: true, img: '/images/swell/taj.jpg', alt: 'Taj Mahal at sunset' },
   { region: 'North', name: 'Kashmir Valleys', season: 'Apr–Oct', dur: '[N] Days, [N] Nights', price: '₹[price]', sample: true, img: '/images/swell/kashmir.jpg', alt: 'Shikaras on Dal Lake, Kashmir' },

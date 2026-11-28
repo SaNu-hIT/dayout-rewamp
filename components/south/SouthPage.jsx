@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {
-  SOUTH_NAV, SOUTH_METER, FILM, STOPS, COAST, ANDAMAN_ISLANDS, SOUTH_CAMP,
+  SOUTH_METER, FILM, STOPS, COAST, ANDAMAN_ISLANDS, SOUTH_CAMP,
   SOUTH_NOTES, SOUTH_FAQ, SOUTH_BY_COAST,
 } from '@/data/south';
 import { ROUTES } from '@/data/swell';
@@ -254,9 +254,8 @@ export default function SouthPage() {
   return (
     <div className={r.page}>
       <RegionHeader
-        links={SOUTH_NAV}
+        current={ROUTES.south}
         gate="COK → STH · Gate S1"
-        switchTo={{ href: ROUTES.north, label: '← Switch to North' }}
         planHref="#tickets"
       />
       <Meter label="Distance along the coast" marks={SOUTH_METER} direction="down" />

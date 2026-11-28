@@ -5,14 +5,6 @@ import { NOTES } from './notes';
 
 const IMG = '/images/swell';
 
-export const SOUTH_NAV = [
-  { href: '#route', label: 'The route' },
-  { href: '#tickets', label: 'Packages' },
-  { href: '#notes', label: 'Field notes' },
-  { href: '#stories', label: 'Stories' },
-  { href: '#landsend', label: 'Contact' },
-];
-
 export const SOUTH_METER = [
   { label: '0 km', href: '#goa' },
   { label: '150 km', href: '#route' },
@@ -68,8 +60,8 @@ export const MOODS = [
 
 // Goa Bachelor's and Goa Couples are real (current site); the rest are samples.
 export const TICKETS = [
-  { moods: ['beach'], name: "Goa Bachelor's", from: 'GOA', to: 'GOA', desc: 'Beaches by day, clubs by night — the full Goa run with your crew.', dur: '3 Days, 2 Nights', season: 'Oct–Mar', price: '₹3,750' },
-  { moods: ['beach'], name: 'Goa Couples', from: 'GOA', to: 'GOA', desc: 'Quiet stays, sunset dinners and time that is just yours.', dur: '4 Days, 3 Nights', season: 'Oct–Mar', price: '₹7,000' },
+  { moods: ['beach'], name: "Goa Bachelor's", slug: 'bachelors-package', from: 'GOA', to: 'GOA', desc: 'Beaches by day, clubs by night — the full Goa run with your crew.', dur: '3 Days, 2 Nights', season: 'Oct–Mar', price: '₹3,750' },
+  { moods: ['beach'], name: 'Goa Couples', slug: 'couples-package', from: 'GOA', to: 'GOA', desc: 'Quiet stays, sunset dinners and time that is just yours.', dur: '4 Days, 3 Nights', season: 'Oct–Mar', price: '₹7,000' },
   { moods: ['hills', 'backwaters'], name: 'Kerala Hills & Backwaters', from: 'COK', to: 'ALP', desc: 'Munnar tea hills, then a houseboat night in Alleppey.', dur: '[N] Days, [N] Nights', season: 'Sep–Mar', price: '₹[price]', sample: true },
   { moods: ['backwaters'], name: 'Alleppey Houseboat Escape', from: 'COK', to: 'ALP', desc: 'A slow day and night on the backwaters, meals cooked on board.', dur: '[N] Days, [N] Nights', season: 'Oct–Mar', price: '₹[price]', sample: true },
   { moods: ['hills'], name: 'Coorg Coffee Trail', from: 'BLR', to: 'CRG', desc: 'Estate stays, a waterfall walk and coffee from the plant up.', dur: '[N] Days, [N] Nights', season: 'Oct–May', price: '₹[price]', sample: true },

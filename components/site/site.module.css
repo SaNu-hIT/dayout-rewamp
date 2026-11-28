@@ -1,0 +1,191 @@
+/* Shared Swell chrome for content pages: header, hero, CTA band, footer,
+   plus the layout pieces those pages share. Tokens live in app/globals.css. */
+
+.page {
+  font-family: 'Outfit', system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-x: clip;
+  background: var(--sea-abyss);
+  color: var(--foam);
+}
+.page a:focus-visible,
+.page button:focus-visible,
+.page input:focus-visible,
+.page select:focus-visible,
+.page textarea:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: var(--rail-gutter);
+  padding-right: var(--rail-gutter);
+}
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Buttons ---- */
+.pill,
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 26px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-small);
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.pill { background: var(--yellow); color: var(--dark); font-weight: 600; }
+.pill:hover { background: var(--paper); }
+.pillDark { background: var(--dark); color: var(--yellow); }
+.pillDark:hover { background: var(--ink-3); }
+.ghost { border: 1px solid var(--ghost-line); background: var(--ghost-fill); color: var(--foam); font-weight: 500; }
+.ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+.compact { min-height: 44px; padding: 0 20px; }
+.chat svg { flex-shrink: 0; }
+
+/* ---- Header (over the hero) ---- */
+.header { position: absolute; inset: 0 0 auto; z-index: 3; color: var(--foam); }
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: var(--fs-h3);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.logoImg { border-radius: 8px; object-fit: contain; }
+.accent { color: var(--yellow); }
+.nav { display: flex; gap: 28px; font-size: var(--fs-small); }
+.nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.nav a:hover,
+.nav a[aria-current='page'] { color: var(--yellow); }
+.nav a[aria-current='page'] { text-decoration: underline; text-underline-offset: 6px; }
+.tools { display: flex; align-items: center; gap: 12px; }
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--sea-glow-bg);
+}
+.photoHero { min-height: min(760px, 92vh); }
+.bandHero { min-height: 520px; }
+.short.photoHero { min-height: 620px; }
+.short.bandHero { min-height: 420px; }
+.heroImg { object-fit: cover; }
+.heroScrim { position: absolute; inset: 0; background: var(--scrim-shore-tall); }
+.heroInner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 140px;
+  padding-bottom: 72px;
+}
+.eyebrow { font-size: var(--fs-label); color: var(--glow); }
+.heroTitle {
+  max-width: 1000px;
+  font-size: var(--fs-swell-hero);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.heroLead { max-width: 640px; font-size: var(--fs-swell-lead); line-height: 1.55; color: var(--on-photo); }
+
+/* ---- Section heads ---- */
+.section { padding-top: var(--space-section); padding-bottom: var(--space-section); }
+.sand { background: var(--swell-sand); color: var(--swell-sand-ink); }
+.postcard { background: var(--postcard); color: var(--dark); }
+.deep { background: var(--sea-deep); color: var(--foam); }
+.kicker { font-size: var(--fs-label); color: var(--glow); }
+.sand .kicker,
+.postcard .kicker { color: var(--south-teal); }
+.h2 { font-size: var(--fs-swell-h2); font-weight: 600; line-height: 1; letter-spacing: -0.03em; }
+.lead { font-size: var(--fs-lead); line-height: 1.6; color: var(--south-mist); }
+.sand .lead { color: var(--swell-sand-muted); }
+.postcard .lead { color: var(--south-ink-muted); }
+
+/* ---- CTA (yellow) ---- */
+.sun { background: var(--yellow); color: var(--dark); }
+.sun a:focus-visible { outline-color: var(--dark); }
+.ctaRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+.ctaCopy { display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+.ctaEyebrow { font-size: var(--fs-label); }
+.ctaTitle { font-size: var(--fs-h2); font-weight: 600; line-height: 1; letter-spacing: -0.03em; }
+.ctaLead { font-size: var(--fs-body); line-height: 1.55; color: var(--sun-deep); }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; flex-shrink: 0; }
+.sunGhost { border-color: var(--dark); background: transparent; color: var(--dark); }
+.sunGhost:hover { border-color: var(--dark); color: var(--sun-ink); background: var(--paper); }
+
+/* ---- Footer ---- */
+.footer { background: var(--sea-abyss); color: var(--south-mist); border-top: 1px solid var(--glow-line); }
+.footCols {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding-top: 64px;
+  padding-bottom: 32px;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+}
+.footCol { display: flex; flex-direction: column; align-items: flex-start; }
+.footCol address { font-style: normal; max-width: 320px; margin-bottom: 8px; }
+.footCol a { min-height: 32px; display: inline-flex; align-items: center; }
+.footCol a:hover { color: var(--yellow); }
+.footLogo { color: var(--foam); margin-bottom: 12px; }
+.footHead { margin-bottom: 10px; font-size: var(--fs-micro); color: var(--south-faint); }
+.fine {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  border-top: 1px solid var(--line-night);
+  font-size: var(--fs-micro);
+  color: var(--south-faint);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1100px) {
+  .nav { display: none; }
+  .ctaRow { flex-direction: column; align-items: flex-start; }
+  .footCols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .chat { display: none; }
+  .photoHero { min-height: 640px; }
+  .bandHero, .short.bandHero { min-height: 380px; }
+  .heroInner { padding-top: 120px; padding-bottom: 56px; }
+  .ctaRow { padding-top: 64px; padding-bottom: 64px; }
+  .footCols { grid-template-columns: minmax(0, 1fr); }
+}

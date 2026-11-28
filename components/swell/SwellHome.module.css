@@ -23,13 +23,7 @@
 .logoImg { border-radius: 8px; object-fit: contain; }
 .accent { color: var(--yellow); }
 
-.links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-size: var(--fs-small);
-}
-.links a:hover { color: var(--yellow); }
+.tools { display: flex; align-items: center; gap: 12px; }
 
 .chat {
   min-height: 44px;
@@ -62,5 +56,9 @@
 
 @media (max-width: 900px) {
   .header { padding: 16px var(--gutter); }
-  .links, .counter { display: none; }
+  .counter { display: none; }
+}
+/* Header wins over the shared .ghost display on phones; the hero has its own WhatsApp CTA. */
+@media (max-width: 600px) {
+  .header .chat { display: none; }
 }

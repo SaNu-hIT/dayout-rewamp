@@ -2,9 +2,12 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { EXPERIENCES } from '@/data/experiences';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import styles from './page.module.css';
+import { CONTACT, ROUTES } from '@/data/swell';
+import { whatsappLink } from '@/lib/waves';
+import ChatIcon from '@/components/swell/ChatIcon';
+import { SiteCta, SiteFooter, SiteHeader, SiteHero } from '@/components/site/SiteChrome';
+import c from '@/components/site/site.module.css';
+import s from './page.module.css';
 
 const BASE_URL = 'https://dayoutholidays.com';
 
@@ -12,177 +15,149 @@ export async function generateStaticParams() {
   return EXPERIENCES.map((exp) => ({ slug: exp.slug }));
 }
 
-export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const exp = EXPERIENCES.find((e) => e.slug === resolvedParams.slug);
-  if (!exp) return { title: 'Experience Not Found' };
+const findExperience = async (params) => {
+  const { slug } = await params;
+  return EXPERIENCES.find((e) => e.slug === slug);
+};
 
+export async function generateMetadata({ params }) {
+  const exp = await findExperience(params);
+  if (!exp) return { title: 'Package not found' };
+
+  const title = `${exp.title} – Goa`;
   return {
-    title: exp.title,
+    title,
     description: exp.desc,
     alternates: { canonical: `${BASE_URL}/experiences/${exp.slug}` },
     openGraph: {
-      title: `${exp.title} | DayOut Goa`,
+      title,
       description: exp.desc,
       url: `${BASE_URL}/experiences/${exp.slug}`,
       type: 'article',
-      images: exp.img
-        ? [{ url: exp.img, width: 1200, height: 630, alt: exp.title }]
-        : [{ url: '/images/hero-bg.jpg', width: 1200, height: 630, alt: exp.title }],
+      images: [{ url: exp.img, width: 1200, height: 630, alt: exp.alt }],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${exp.title} | DayOut Goa`,
-      description: exp.desc,
-      images: exp.img ? [exp.img] : ['/images/hero-bg.jpg'],
-    },
+    twitter: { card: 'summary_large_image', title, description: exp.desc, images: [exp.img] },
   };
 }
 
 export default async function ExperienceDetail({ params }) {
-  const resolvedParams = await params;
-  const exp = EXPERIENCES.find((e) => e.slug === resolvedParams.slug);
-
+  const exp = await findExperience(params);
   if (!exp) notFound();
 
-  const related = EXPERIENCES.filter((e) => e.slug !== exp.slug && e.type === exp.type).slice(0, 3);
-  const fallbackRelated = related.length > 0 ? related : EXPERIENCES.filter((e) => e.slug !== exp.slug).slice(0, 3);
+  // Same kind of trip first, then the rest, three in all.
+  const others = EXPERIENCES.filter((e) => e.slug !== exp.slug);
+  const more = [...others.filter((e) => e.type === exp.type), ...others.filter((e) => e.type !== exp.type)].slice(0, 3);
+  const url = `${BASE_URL}/experiences/${exp.slug}`;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Packages', item: `${BASE_URL}/#packages` },
-      { '@type': 'ListItem', position: 3, name: exp.title, item: `${BASE_URL}/experiences/${exp.slug}` },
+      { '@type': 'ListItem', position: 2, name: 'South India', item: `${BASE_URL}${ROUTES.south}` },
+      { '@type': 'ListItem', position: 3, name: exp.title, item: url },
     ],
   };
+  // Escape "<" so the JSON can never close the script tag early.
+  const schemaJson = JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c');
 
-  const waShareText = encodeURIComponent(`Check out ${exp.title} on DayOut Holidays! ${BASE_URL}/experiences/${exp.slug}`);
+  const enquire = whatsappLink(CONTACT.phone, `Hi DayOut, I'm interested in the ${exp.title} (${exp.duration}, ${exp.price}/${exp.unit}).`);
+  const share = `https://wa.me/?text=${encodeURIComponent(`${exp.title} with DayOut Holidays: ${url}`)}`;
 
   return (
-    <main className={styles.main}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(breadcrumbSchema)}} />
-      <Navbar />
+    <div className={c.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaJson }} />
+      <SiteHeader />
+      <main>
+        <SiteHero eyebrow={`${exp.badge} · ${exp.location}`} title={exp.title} lead={exp.desc} img={exp.img} alt={exp.alt} size="short">
+          <nav aria-label="Breadcrumb" className={s.crumbs}>
+            <ol>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href={ROUTES.south}>South India</Link></li>
+              <li aria-current="page">{exp.title}</li>
+            </ol>
+          </nav>
+        </SiteHero>
 
-      {/* Breadcrumb nav */}
-      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-        <Link href="/">Home</Link>
-        <span aria-hidden="true"> / </span>
-        <Link href="/#packages">Packages</Link>
-        <span aria-hidden="true"> / </span>
-        <span aria-current="page">{exp.title}</span>
-      </nav>
+        <section className={`${c.section} ${c.postcard}`} aria-label="Package details">
+          <div className={`${c.wrap} ${s.layout}`}>
+            <div className={s.main}>
+              <div className={s.block}>
+                <p className={`${c.mono} ${c.kicker}`}>Day by day</p>
+                <h2 className={s.h2}>Itinerary</h2>
+                <ol className={s.days}>
+                  {exp.itinerary.map((day) => (
+                    <li key={day.time} className={s.day}>
+                      <span className={`${c.mono} ${s.dayLabel}`}>{day.time}</span>
+                      <p>{day.desc}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
 
-      <section className={styles.hero}>
-        <div className={styles.heroBg}>
-          <Image src={exp.img} alt={exp.alt} fill priority className={styles.bgImg} />
-        </div>
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <div className="section-tag" style={{ justifyContent: 'center' }}>{exp.badge}</div>
-          <h1 className={styles.title}>{exp.title}</h1>
-          <p className={styles.location}>📍 {exp.location}</p>
-        </div>
-      </section>
+              <div className={s.block}>
+                <p className={`${c.mono} ${c.kicker}`}>In the price</p>
+                <h2 className={s.h2}>What’s included</h2>
+                <ul className={s.included}>
+                  {exp.included.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </div>
 
-      <section className={styles.content}>
-        <div className={styles.grid}>
-
-          <div className={styles.mainColumn}>
-            <div className={styles.block}>
-              <h2>Overview</h2>
-              <p className={styles.desc}>{exp.desc}</p>
+              <a href={share} target="_blank" rel="noopener noreferrer" className={s.share}>
+                Share this package on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </div>
 
-            <div className={styles.block}>
-              <h2>Itinerary</h2>
-              <ul className={styles.itinerary}>
-                {exp.itinerary.map((item, idx) => (
-                  <li key={idx} className={styles.itineraryItem}>
-                    <div className={styles.time}>{item.time}</div>
-                    <div className={styles.itDesc}>{item.desc}</div>
+            <aside className={s.card} aria-label="Price and booking">
+              <p className={`${c.mono} ${s.cardLabel}`}>From</p>
+              <p className={s.price}>{exp.price}<span className={s.unit}> / {exp.unit}</span></p>
+              <dl className={s.facts}>
+                <div><dt className={c.mono}>Duration</dt><dd>{exp.duration}</dd></div>
+                <div><dt className={c.mono}>Where</dt><dd>{exp.location}</dd></div>
+              </dl>
+              <a href={enquire} target="_blank" rel="noopener noreferrer" className={`${c.pill} ${c.pillDark} ${s.cardCta}`}>
+                <ChatIcon />Enquire on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <Link href={ROUTES.contact} className={s.cardLink}>Or send a trip request</Link>
+              <p className={s.note}>Advance payments are non-refundable.</p>
+            </aside>
+          </div>
+        </section>
+
+        {more.length > 0 && (
+          <section className={`${c.section} ${c.sand}`} aria-labelledby="more-title">
+            <div className={c.wrap}>
+              <p className={`${c.mono} ${c.kicker}`}>Also in Goa</p>
+              <h2 id="more-title" className={c.h2}>More Goa packages</h2>
+              <ul className={s.more}>
+                {more.map((m) => (
+                  <li key={m.slug} className={s.moreCard}>
+                    <div className={s.moreImg}>
+                      <Image src={m.img} alt={m.alt} fill sizes="(max-width: 760px) 100vw, 33vw" />
+                    </div>
+                    <div className={s.moreText}>
+                      <p className={`${c.mono} ${s.moreKicker}`}>{m.badge} · {m.duration}</p>
+                      <h3 className={s.moreTitle}>
+                        <Link href={ROUTES.experience(m.slug)} className={s.moreLink}>{m.title}</Link>
+                      </h3>
+                      <p className={s.morePrice}>{m.price} / {m.unit}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
             </div>
+          </section>
+        )}
 
-            <div className={styles.block}>
-              <h2>What&apos;s Included</h2>
-              <ul className={styles.included}>
-                {exp.included.map((item, idx) => (
-                  <li key={idx}>✓ {item}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Share */}
-            <div className={styles.shareRow}>
-              <span>Share this package:</span>
-              <a
-                href={`https://wa.me/?text=${waShareText}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.shareBtn}
-                aria-label="Share on WhatsApp"
-              >
-                📱 Share on WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <div className={styles.sideColumn}>
-            <div className={styles.bookingCard}>
-              <div className={styles.priceRow}>
-                <span className={styles.price}>{exp.price}</span>
-                <span className={styles.unit}>/ {exp.unit}</span>
-              </div>
-              <div className={styles.duration}>⏱ {exp.duration}</div>
-              {exp.slotsLeft <= 5 && (
-                <div className={styles.slotsWarning}>🔥 Only {exp.slotsLeft} slots left!</div>
-              )}
-              <Link href={`/contact?exp=${exp.slug}`} className={styles.bookBtn}>
-                Book This Experience
-              </Link>
-              <a
-                href={`https://wa.me/918848965352?text=Hi DayOut, I'm interested in the ${exp.title} package!`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.waBtn}
-              >
-                💬 WhatsApp Us
-              </a>
-              <p className={styles.guarantee}>
-                🔒 Secure booking • Advance payment is non-refundable.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Related Experiences */}
-      {fallbackRelated.length > 0 && (
-        <section className={styles.related}>
-          <h2 className={styles.relatedTitle}>You Might Also Like</h2>
-          <div className={styles.relatedGrid}>
-            {fallbackRelated.map((r) => (
-              <Link key={r.slug} href={`/experiences/${r.slug}`} className={styles.relatedCard} prefetch={true}>
-                <div className={styles.relatedImg}>
-                  <Image src={r.img} alt={r.alt} fill sizes="33vw" className={styles.relatedImgInner} />
-                  <span className={styles.relatedBadge}>{r.badge}</span>
-                </div>
-                <div className={styles.relatedBody}>
-                  <h3>{r.title}</h3>
-                  <span className={styles.relatedPrice}>{r.price} / {r.unit}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <Footer />
-    </main>
+        <SiteCta
+          eyebrow="Goa · one message"
+          title="Want it changed? Just ask."
+          lead="Dates, hotels and activities can all move. Tell us what you want and we will shape the package around it."
+          message={`Hi DayOut, I'd like a custom version of the ${exp.title}.`}
+          links={[{ href: ROUTES.south, label: 'See all of South India' }]}
+        />
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

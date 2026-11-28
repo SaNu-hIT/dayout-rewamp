@@ -50,6 +50,7 @@ export default function RegionFooter({ id, theme, photo, scrim, overlay, eyebrow
             <Link href={switchTo.href}>{switchTo.region}</Link>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
             <Link href="/privacy">Privacy Policy</Link>
             <Link href="/terms">Terms of Service</Link>
           </nav>
