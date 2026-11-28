@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import { CONTACT, WAVES, ROUTES } from '@/data/swell';
+import { CONTACT, WAVES } from '@/data/swell';
+import { MainNav } from '@/components/site/SiteChrome';
+import MobileMenu from '@/components/site/MobileMenu';
 import { TILE, waveEdge, wavePath, crestMask, whatsappLink } from '@/lib/waves';
 import Shore from './Shore';
 import Choose from './Choose';
@@ -26,20 +28,18 @@ export default function SwellHome() {
   return (
     <div className={s.page}>
       <header className={h.header}>
-        {/* Same logo lockup as the site Navbar: icon + "DayOut" wordmark. */}
+        {/* Same logo lockup as every page header: icon + "DayOut" wordmark. */}
         <a href="#top" className={h.logo} aria-label="DayOut Holidays home">
           <Image src="/images/logo.png" alt="" width={36} height={36} preload className={h.logoImg} />
           <span>Day<span className={h.accent}>Out</span></span>
         </a>
-        <nav aria-label="Main" className={h.links}>
-          <a href={ROUTES.north}>North</a>
-          <a href={ROUTES.south}>South</a>
-          <a href="#swell">Packages</a>
-          <a href="#glow">Field notes</a>
-        </nav>
-        <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${s.ghost} ${h.chat}`}>
-          <ChatIcon />WhatsApp<span className="sr-only"> (opens in a new tab)</span>
-        </a>
+        <MainNav current="/" />
+        <div className={h.tools}>
+          <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${s.ghost} ${h.chat}`}>
+            <ChatIcon />WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <MobileMenu current="/" />
+        </div>
       </header>
 
       <nav aria-label="Waves" className={h.counter}>

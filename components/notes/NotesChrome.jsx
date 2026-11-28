@@ -3,18 +3,13 @@ import Link from 'next/link';
 import { CONTACT, ROUTES } from '@/data/swell';
 import { whatsappLink } from '@/lib/waves';
 import ChatIcon from '@/components/swell/ChatIcon';
+import { MainNav } from '@/components/site/SiteChrome';
+import MobileMenu from '@/components/site/MobileMenu';
 import s from './notes.module.css';
-
-const NAV = [
-  { href: '/', label: 'Home' },
-  { href: ROUTES.north, label: 'North' },
-  { href: ROUTES.south, label: 'South' },
-  { href: ROUTES.notes, label: 'Field notes' },
-  { href: '/contact', label: 'Contact' },
-];
 
 /** Site header for the notes pages. `current` marks Field notes as the current page on the index only. */
 export function NotesHeader({ current = false }) {
+  const here = current ? ROUTES.notes : undefined;
   return (
     <header className={s.header}>
       <div className={`${s.wrap} ${s.bar}`}>
@@ -22,14 +17,11 @@ export function NotesHeader({ current = false }) {
           <Image src="/images/logo.png" alt="" width={36} height={36} className={s.logoImg} />
           <span>Day<span className={s.accent}>Out</span></span>
         </Link>
-        <nav className={s.nav} aria-label="Main">
-          {NAV.map((l) => (
-            <Link key={l.href} href={l.href} aria-current={current && l.href === ROUTES.notes ? 'page' : undefined}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        <a href="#plan" className={`${s.pill} ${s.compact}`}>Plan your trip</a>
+        <MainNav current={here} />
+        <div className={s.tools}>
+          <a href="#plan" className={`${s.pill} ${s.compact} ${s.plan}`}>Plan your trip</a>
+          <MobileMenu current={here} />
+        </div>
       </div>
     </header>
   );
@@ -75,8 +67,9 @@ export function NotesFooter() {
         <div className={s.footCol}>
           <p className={`${s.mono} ${s.footHead}`}>Company</p>
           <Link href={ROUTES.about}>About</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/privacy">Privacy</Link>
+          <Link href={ROUTES.contact}>Contact</Link>
+          <Link href={ROUTES.privacy}>Privacy</Link>
+          <Link href={ROUTES.terms}>Terms</Link>
         </div>
       </div>
       <p className={`${s.wrap} ${s.mono} ${s.fine}`}>© DayOut Holidays · Notes marked sample are placeholders</p>

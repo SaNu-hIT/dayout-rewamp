@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { BOARDS, CONTACT } from '@/data/swell';
+import Link from 'next/link';
+import { BOARDS, CONTACT, ROUTES } from '@/data/swell';
 import { whatsappLink } from '@/lib/waves';
 import Panel from './Panel';
 import s from './swell.module.css';
@@ -37,6 +38,11 @@ export default function Boards({ foam }) {
                 >
                   Enquire<span className="sr-only"> about {b.name} on WhatsApp (opens in a new tab)</span>
                 </a>
+                {b.slug && (
+                  <Link href={ROUTES.experience(b.slug)} className={c.details}>
+                    See details<span className="sr-only"> of {b.name}</span>
+                  </Link>
+                )}
               </div>
             </article>
           ))}

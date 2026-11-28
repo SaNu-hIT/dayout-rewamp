@@ -1,0 +1,48 @@
+/* Legal pages: long-form text on the postcard. */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) minmax(0, 260px);
+  justify-content: space-between;
+  gap: 64px;
+  padding-top: 80px;
+  padding-bottom: var(--space-section);
+}
+.prose { font-size: var(--fs-body); line-height: 1.75; color: var(--notes-ink); }
+.prose h2 {
+  margin: 44px 0 12px;
+  font-size: var(--fs-note-h2);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+}
+.prose h2:first-child { margin-top: 0; }
+.prose p { margin-bottom: 16px; }
+.prose ul { margin: 0 0 16px; padding-left: 22px; list-style: disc; }
+.prose li { margin-bottom: 8px; }
+.prose a { color: var(--south-teal); text-decoration: underline; text-underline-offset: 3px; }
+.prose a:hover { color: var(--dark); }
+.prose strong { color: var(--dark); }
+
+.aside {
+  position: sticky;
+  top: 32px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: var(--radius-card);
+  background: var(--shell);
+  font-size: var(--fs-small);
+}
+.asideHead { margin-bottom: 8px; font-size: var(--fs-micro); color: var(--south-ink-muted); }
+.aside a { min-height: 44px; display: flex; align-items: center; border-top: 1px solid var(--ticket-rule); color: var(--south-teal); }
+.aside a:hover,
+.aside a[aria-current='page'] { color: var(--dark); font-weight: 600; }
+.aside a:focus-visible { outline: 3px solid var(--south-teal); outline-offset: 2px; }
+
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 56px; }
+  .aside { position: static; order: 1; }
+}

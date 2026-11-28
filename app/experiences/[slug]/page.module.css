@@ -1,363 +1,129 @@
-.main {
-  min-height: 100vh;
-}
+/* A Goa package: itinerary and price card on the postcard, more packages on sand. */
 
-.hero {
-  position: relative;
-  height: 60vh;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  padding-top: 72px;
-}
+.crumbs { margin-top: 8px; font-size: var(--fs-small); color: var(--on-photo); }
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.crumbs li { display: inline-flex; align-items: center; gap: 8px; }
+.crumbs li + li::before { content: '/'; opacity: 0.7; }
+.crumbs a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+.crumbs a:hover { color: var(--yellow); }
 
-.heroBg {
-  position: absolute;
-  inset: 0;
-}
-
-.bgImg {
-  object-fit: cover;
-}
-
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(10,10,15,0.4) 0%, rgba(10,10,15,0.9) 100%);
-}
-
-.heroContent {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  padding: 0 20px;
-}
-
-.title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -1px;
-  margin-bottom: 16px;
-  animation: fadeUp 0.8s ease both;
-}
-
-.location {
-  font-size: 1.1rem;
-  color: var(--yellow);
-  font-weight: 600;
-  animation: fadeUp 0.8s 0.2s ease both;
-}
-
-.content {
-  padding: 80px 5%;
-  background: var(--dark);
-}
-
-.grid {
+.layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 60px;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: 64px;
+  align-items: start;
 }
+.main { display: flex; flex-direction: column; gap: 56px; }
+.block { display: flex; flex-direction: column; gap: 12px; }
+.h2 { font-size: var(--fs-h2-sm); font-weight: 600; line-height: 1.05; letter-spacing: -0.03em; }
 
-.block {
-  margin-bottom: 64px;
-}
-
-.block h2 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  color: var(--text);
-}
-
-.desc {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: rgba(240,240,245,0.8);
-}
-
-.itinerary {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.itineraryItem {
-  display: flex;
-  gap: 24px;
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-
-.time {
-  font-weight: 700;
-  color: var(--yellow);
-  min-width: 100px;
-  flex-shrink: 0;
-}
-
-.itDesc {
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.included {
-  list-style: none;
+.days { display: flex; flex-direction: column; margin-top: 16px; }
+.day {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px dashed var(--trail-dash);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--notes-ink);
 }
+.dayLabel { padding-top: 3px; font-size: var(--fs-label); color: var(--south-teal); }
 
+.included { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 .included li {
-  color: var(--text);
-  font-size: 1.05rem;
-  background: rgba(255,255,255,0.03);
-  padding: 12px 20px;
-  border-radius: 8px;
-}
-
-.sideColumn {
-  position: relative;
-}
-
-.bookingCard {
-  position: sticky;
-  top: 120px;
-  background: var(--dark2);
-  border: 1px solid var(--yellow);
-  border-radius: var(--radius);
-  padding: 32px;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
-}
-
-.priceRow {
-  margin-bottom: 12px;
-}
-
-.price {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--yellow);
-}
-
-.unit {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-left: 8px;
-}
-
-.duration {
-  font-size: 1rem;
-  color: var(--text);
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.bookBtn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: var(--yellow);
-  color: var(--dark);
-  font-weight: 700;
-  padding: 18px;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  transition: var(--transition);
-  margin-bottom: 16px;
-}
-
-.bookBtn:hover {
-  background: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--yellow-glow);
-}
-
-.guarantee {
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.breadcrumb {
-  padding: 100px 5% 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 100px;
-}
-
-.breadcrumb a {
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.breadcrumb a:hover { color: var(--yellow); }
-
-.shareRow {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-top: -32px;
-}
-
-.shareBtn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(37, 211, 102, 0.12);
-  border: 1px solid rgba(37, 211, 102, 0.3);
-  color: #25D366;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: background 0.2s;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  background: var(--shell);
+  color: var(--south-teal);
+  font-size: var(--fs-small);
+  font-weight: 500;
 }
+.included li::before { content: '✓'; font-weight: 700; }
 
-.shareBtn:hover { background: rgba(37, 211, 102, 0.22); }
-
-.slotsWarning {
-  background: rgba(220, 38, 38, 0.12);
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  color: #ff6b6b;
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-align: center;
-  padding: 8px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.waBtn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: rgba(37, 211, 102, 0.12);
-  border: 1px solid rgba(37, 211, 102, 0.3);
-  color: #25D366;
-  font-weight: 700;
-  padding: 14px;
-  border-radius: 50px;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: background 0.2s;
-  margin-bottom: 20px;
-}
-
-.waBtn:hover { background: rgba(37, 211, 102, 0.22); }
-
-.related {
-  padding: 80px 5%;
-  background: var(--dark2);
-  border-top: 1px solid var(--border);
-}
-
-.relatedTitle {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 800;
-  margin-bottom: 36px;
-  text-align: center;
-}
-
-.relatedGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.relatedCard {
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.relatedCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(245, 197, 24, 0.4);
-}
-
-.relatedImg {
-  position: relative;
-  height: 180px;
-  overflow: hidden;
-}
-
-.relatedImgInner {
-  object-fit: cover;
-  transition: transform 0.5s ease !important;
-}
-
-.relatedCard:hover .relatedImgInner { transform: scale(1.06) !important; }
-
-.relatedBadge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(10, 10, 15, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 4px 12px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--yellow);
-}
-
-.relatedBody {
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
+.share {
+  align-self: flex-start;
+  min-height: 44px;
+  display: inline-flex;
   align-items: center;
+  color: var(--south-teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
+.share:hover { color: var(--dark); }
 
-.relatedBody h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text);
+.card {
+  position: sticky;
+  top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  border-radius: var(--radius-card);
+  background: var(--yellow);
+  color: var(--dark);
+  box-shadow: var(--shadow-post);
 }
+.card a:focus-visible { outline-color: var(--dark); }
+.cardLabel { font-size: var(--fs-micro); color: var(--sun-deep); }
+.price { font-size: var(--fs-h2-sm); font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+.unit { font-size: var(--fs-body); font-weight: 500; color: var(--sun-deep); }
+.facts { display: flex; flex-direction: column; }
+.facts div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line-dark); font-size: var(--fs-small); }
+.facts dt { font-size: var(--fs-micro); color: var(--sun-deep); align-self: center; }
+.facts dd { font-weight: 600; text-align: right; }
+.cardCta { width: 100%; min-height: 52px; }
+.cardLink { align-self: center; min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.cardLink:hover { color: var(--sun-ink); }
+.note { font-size: var(--fs-label); color: var(--sun-deep); text-align: center; }
 
-.relatedPrice {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--yellow);
-  white-space: nowrap;
+.more {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
 }
+.moreCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--board);
+  color: var(--swell-sand-ink);
+  box-shadow: var(--shadow-board);
+  transition: transform 0.5s var(--ease-swell);
+}
+.moreCard:hover,
+.moreCard:focus-within { transform: translateY(-6px); }
+.moreImg { position: relative; height: 220px; }
+.moreImg img { object-fit: cover; }
+.moreText { display: flex; flex-direction: column; gap: 8px; padding: 22px 22px 26px; }
+.moreKicker { font-size: var(--fs-micro); color: var(--swell-sand-muted); }
+.moreTitle { font-size: var(--fs-swell-card); font-weight: 600; line-height: 1.25; }
+/* The whole card is the link target. */
+.moreLink::after { content: ''; position: absolute; inset: 0; }
+.moreLink:focus-visible { outline: none; }
+.moreCard:focus-within { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.morePrice { font-size: var(--fs-small); font-weight: 600; color: var(--board-ink); }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .included {
-    grid-template-columns: 1fr;
-  }
-  .bookingCard {
-    position: static;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .moreCard { transition: none; }
+  .moreCard:hover, .moreCard:focus-within { transform: none; }
+}
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .card { position: static; order: -1; }
+  .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .more { grid-template-columns: minmax(0, 1fr); }
+  .day { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .card { padding: 24px; }
 }

@@ -5,14 +5,6 @@ import { NOTES } from './notes';
 
 const IMG = '/images/swell';
 
-export const NORTH_NAV = [
-  { href: '#climb', label: 'Destinations' },
-  { href: '#grades', label: 'Packages' },
-  { href: '#himalaya', label: 'Himalaya' },
-  { href: '#notes', label: 'Field notes' },
-  { href: '#summit', label: 'Contact' },
-];
-
 // Fixed altitude meter: each mark jumps to its section.
 export const NORTH_METER = [
   { label: '80 m', href: '#base' },

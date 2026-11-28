@@ -28,10 +28,6 @@
 .logoImg { border-radius: 8px; object-fit: contain; }
 .accent { color: var(--yellow); }
 
-.links { display: flex; align-items: center; gap: 32px; font-size: var(--fs-small); }
-.links a { min-height: 24px; display: inline-flex; align-items: center; }
-.links a:hover { color: var(--yellow); }
-
 .tools { display: flex; align-items: center; gap: 12px; }
 .gate {
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -95,10 +91,11 @@
 .meterList .here { opacity: 1; }
 .meterList .here::before { width: 12px; }
 
-@media (max-width: 1100px) {
-  .links { display: none; }
+/* Room for the full main menu: the gate tag goes first, the plan CTA on phones. */
+@media (max-width: 1320px) {
+  .gate { display: none; }
 }
 @media (max-width: 900px) {
-  .meter, .gate, .plan { display: none; }
+  .meter, .plan { display: none; }
   .header { padding: 16px var(--gutter); }
 }

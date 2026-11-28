@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { MOODS, TICKETS } from '@/data/south';
-import { CONTACT } from '@/data/swell';
+import Link from 'next/link';
+import { CONTACT, ROUTES } from '@/data/swell';
 import { whatsappLink } from '@/lib/waves';
 import r from '@/components/region/region.module.css';
 import s from './south.module.css';
@@ -71,6 +72,11 @@ export default function Tickets() {
                   >
                     Enquire<span className="sr-only"> about {t.name} on WhatsApp (opens in a new tab)</span>
                   </a>
+                  {t.slug && (
+                    <Link href={ROUTES.experience(t.slug)} className={s.details}>
+                      See details<span className="sr-only"> of {t.name}</span>
+                    </Link>
+                  )}
                 </div>
               </article>
             </li>

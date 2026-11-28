@@ -356,6 +356,8 @@
 }
 .price { margin-top: 6px; font-size: var(--fs-swell-price); font-weight: 600; color: var(--south-teal); letter-spacing: -0.02em; }
 .enquire { min-height: 44px; padding: 0 18px; }
+.details { min-height: 44px; display: inline-flex; align-items: center; color: var(--south-teal); font-size: var(--fs-small); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.details:hover { color: var(--dark); }
 .punch {
   position: absolute;
   right: calc(var(--stub) - 14px);

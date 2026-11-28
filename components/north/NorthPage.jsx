@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {
-  NORTH_NAV, NORTH_METER, DESTINATIONS, NORTH_CAMP, BASECAMP_STACK, HIMALAYA,
+  NORTH_METER, DESTINATIONS, NORTH_CAMP, BASECAMP_STACK, HIMALAYA,
   NORTH_NOTES, NORTH_FAQ, NORTH_BY_HEIGHT,
 } from '@/data/north';
 import { ROUTES } from '@/data/swell';
@@ -220,9 +220,8 @@ export default function NorthPage() {
   return (
     <div className={r.page}>
       <RegionHeader
-        links={NORTH_NAV}
+        current={ROUTES.north}
         gate="COK → NTH · Gate N1"
-        switchTo={{ href: ROUTES.south, label: 'Switch to South →' }}
         planHref="#grades"
       />
       <Meter label="Altitude" marks={NORTH_METER} direction="up" />

@@ -94,6 +94,8 @@
 .dur { font-size: var(--fs-small); color: var(--board-ink); }
 .price { margin-top: auto; font-size: var(--fs-swell-price); font-weight: 600; }
 .enquire { min-height: 44px; padding: 0 20px; }
+.details { align-self: center; min-height: 44px; display: inline-flex; align-items: center; font-size: var(--fs-small); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.details:hover { color: var(--swell-scroll); }
 
 @media (max-width: 900px) {
   .inner { padding: calc(var(--crest-h) + 96px) 0 72px var(--gutter); }
