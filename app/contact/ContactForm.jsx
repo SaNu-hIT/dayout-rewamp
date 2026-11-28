@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { submitLead } from '../actions';
 import styles from './page.module.css';
 import { EXPERIENCES } from '@/data/experiences';
@@ -8,8 +8,15 @@ import { EXPERIENCES } from '@/data/experiences';
 export default function ContactForm() {
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
   const [message, setMessage] = useState('');
+  const inFlight = useRef(false);
 
-  const handleSubmit = async (formData) => {
+  // onSubmit, not a form action: React resets action forms afterwards, which would wipe the
+  // visitor's input when the server rejects one field.
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (inFlight.current) return; // a second tap before the first reply sends nothing
+    const formData = new FormData(event.currentTarget);
+    inFlight.current = true;
     setStatus('submitting');
     try {
       const response = await submitLead(formData);
@@ -20,9 +27,11 @@ export default function ContactForm() {
         setStatus('error');
         setMessage(response.message || 'Something went wrong. Please try again.');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setMessage('An error occurred. Please try again later.');
+    } finally {
+      inFlight.current = false;
     }
   };
 
@@ -40,7 +49,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form action={handleSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <h3 style={{ fontSize: '1.5rem', marginBottom: '24px', fontWeight: 800 }}>Trip Request Form</h3>
       
       <div className={styles.formRow}>
@@ -100,6 +109,11 @@ export default function ContactForm() {
       <div className={styles.formGroup}>
         <label htmlFor="message">Tell us about your trip</label>
         <textarea id="message" name="message" rows="4" placeholder="Any special requests, occasions, or specific experiences you're looking for?" />
+      </div>
+
+      <div className="hp-field" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>

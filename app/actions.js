@@ -1,27 +1,16 @@
 'use server';
 
+import { isBot, parseLead, toCrmPayload } from '@/lib/lead';
+
+const LEAD_RECEIVED = 'Thank you! Your trip request has been received. Our team will contact you shortly.';
+const CRM_TIMEOUT_MS = 10_000;
+
 export async function submitLead(formData) {
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const phone = formData.get('phone');
-  const destination = formData.get('destination');
-  const checkIn = formData.get('checkIn');
-  const checkOut = formData.get('checkOut');
-  const pkg = formData.get('package');
+  // Answer bots as if it worked so they get no signal to adapt; nothing reaches the CRM.
+  if (formData instanceof FormData && isBot(formData)) return { success: true, message: LEAD_RECEIVED };
 
-  const customData = {
-    ...(destination && { destination }),
-    ...(pkg && { package: pkg }),
-    ...(checkIn && { checkin: checkIn }),
-    ...(checkOut && { checkout: checkOut }),
-  };
-
-  const payload = {
-    name,
-    phone,
-    ...(email && { email }),
-    ...(Object.keys(customData).length > 0 && { customData }),
-  };
+  const parsed = parseLead(formData);
+  if (!parsed.ok) return { success: false, message: parsed.message };
 
   try {
     const res = await fetch(process.env.TRAVEL_CRM_URL, {
@@ -30,20 +19,21 @@ export async function submitLead(formData) {
         'Content-Type': 'application/json',
         'x-api-key': process.env.TRAVEL_CRM_API_KEY,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(toCrmPayload(parsed.lead)),
+      signal: AbortSignal.timeout(CRM_TIMEOUT_MS),
     });
 
     if (!res.ok) {
-      const text = await res.text();
-      console.error('CRM error:', res.status, text);
+      // Status only: the CRM response body can echo the visitor's details.
+      console.error('CRM error', { status: res.status });
       return { success: false, message: 'Something went wrong. Please try again or call us directly.' };
     }
   } catch (err) {
-    console.error('CRM request failed:', err);
+    console.error('CRM request failed', { name: err?.name, message: err?.message });
     return { success: false, message: 'Unable to reach our system. Please try again later.' };
   }
 
-  return { success: true, message: 'Thank you! Your trip request has been received. Our team will contact you shortly.' };
+  return { success: true, message: LEAD_RECEIVED };
 }
 
 export async function subscribeNewsletter(email) {
