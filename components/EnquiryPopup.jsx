@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { submitLead } from '@/app/actions';
 import styles from './EnquiryPopup.module.css';
 
@@ -29,6 +29,8 @@ function markDone() {
 export default function EnquiryPopup() {
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | submitting | success
+  const [error, setError] = useState('');
+  const inFlight = useRef(false);
 
   useEffect(() => {
     if (!shouldShow()) return;
@@ -41,8 +43,15 @@ export default function EnquiryPopup() {
 
   const close = () => setVisible(false);
 
-  const handleSubmit = async (formData) => {
+  // onSubmit, not a form action: React resets action forms afterwards, which would wipe the
+  // visitor's input when the server rejects one field.
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (inFlight.current) return; // a second tap before the first reply sends nothing
+    const formData = new FormData(event.currentTarget);
+    inFlight.current = true;
     setStatus('submitting');
+    setError('');
     try {
       const res = await submitLead(formData);
       if (res.success) {
@@ -50,9 +59,13 @@ export default function EnquiryPopup() {
         markDone();
       } else {
         setStatus('idle');
+        setError(res.message);
       }
     } catch {
       setStatus('idle');
+      setError('Unable to send right now. Please try again or WhatsApp us.');
+    } finally {
+      inFlight.current = false;
     }
   };
 
@@ -79,7 +92,7 @@ export default function EnquiryPopup() {
               <p>Tell us what you’re looking for and we’ll craft the perfect trip for you.</p>
             </div>
             <div className={styles.body}>
-              <form className={styles.form} action={handleSubmit}>
+              <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.row}>
                   <div className={styles.field}>
                     <label htmlFor="eq-name">Your Name *</label>
@@ -105,9 +118,14 @@ export default function EnquiryPopup() {
                   <label htmlFor="eq-email">Email Address</label>
                   <input id="eq-email" name="email" type="email" placeholder="john@example.com" />
                 </div>
+                <div className="hp-field" aria-hidden="true">
+                  <label htmlFor="eq-website">Website</label>
+                  <input id="eq-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
                 <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>
                   {status === 'submitting' ? 'Sending...' : 'Get a Free Quote →'}
                 </button>
+                <p className={styles.error} role="alert">{error}</p>
               </form>
               <span className={styles.skipLink} onClick={close}>
                 No thanks, I’ll browse on my own

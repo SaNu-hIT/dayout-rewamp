@@ -103,6 +103,14 @@
   gap: 16px;
 }
 
+.error {
+  color: var(--error-on-dark);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.error:empty { display: none; }
+
 .row {
   display: flex;
   gap: 12px;
